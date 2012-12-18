@@ -12,11 +12,14 @@ require_once 'Rtm/DataContainer.php';
 require_once 'Rtm/Exception.php';
 
 // Services
+require_once 'Rtm/Service/AbstractService.php';
 require_once 'Rtm/Service/Auth.php';
+require_once 'Rtm/Service/Contacts.php';
+require_once 'Rtm/Service/Timelines.php';
 
 // API keys
 define('API_KEY', '77bab94ee2471173898a8cec8c901692');
-define('SECRET', '3d8bfb94932039e3');
+define('SECRET',  '3d8bfb94932039e3');
 
 // Start the session
 session_start();

@@ -2,13 +2,15 @@
 
 require_once 'bootstrap.php';
 
+use Rtm\Rtm;
+
 $rtm = new \Rtm\Rtm(API_KEY, SECRET);
 $rtm->setAuthToken(isset($_SESSION['RTM_AUTH_TOKEN']) ? $_SESSION['RTM_AUTH_TOKEN'] : null);
 
 try
 {
     // Check authentication token
-    $rtm->auth->checkToken();
+    $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
 
     // Successfully authenticated, redirect to app
     header('Location: index.php');
@@ -20,23 +22,6 @@ catch(Exception $e)
     {
         try
         {
-            $response = $rtm->auth->getToken($_GET['frob']);
-            $_SESSION['RTM_AUTH_TOKEN'] = $response->getAuth()->getToken();
-
-            // Check authentication token
-            $rtm->auth->checkToken();
-
-            // Authentication successful
-            header('Location: rtm.php');
-        }
-        catch(Exception $e)
-        {
-            echo 'Authentication somewhat failed...';
-        }
-    }
-    else
-    {
-        // No permissions, acquire it
-        header('Location: ' . $rtm->getAuthUrl('delete'));
-    }
-}
+            $response = $rtm->getService(Rtm::SERVICE_AUTH)->getToken($_GET['frob']);
+            $_SESSION['RTM_AUTH_TOKEN'] = $response->getToken();
+          
