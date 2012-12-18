@@ -1,34 +1,38 @@
 <?php
 
-set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/src/');
+require_once 'bootstrap.php';
 
-require_once 'Rtm/Rtm.php';
-require_once 'Rtm/Request.php';
-require_once 'Rtm/Client.php';
-require_once 'Rtm/Auth.php';
-require_once 'Rtm/Response.php';
-require_once 'Rtm/DataContainer.php';
+$rtm = new \Rtm\Rtm(API_KEY, SECRET);
+$rtm->setAuthToken(isset($_SESSION['RTM_AUTH_TOKEN']) ? $_SESSION['RTM_AUTH_TOKEN'] : null);
 
-session_start();
-
-$rtm = new \Rtm\Rtm('77bab94ee2471173898a8cec8c901692', '3d8bfb94932039e3');
-
-if(isset($_GET['frob'])) {
-    print_r($rtm->auth->getToken($_GET['frob']));
-    exit;
-}
-
-$rtm->setAuthToken('76562261ce2f1d45af923a7fde5fc6285b923453');
-
-if(!$rtm->getAuthToken()) {
-    header("Location: ".$rtm->getAuthUrl('write'));
-    exit();
-}
-
-echo '<pre>';
-$tasks = $rtm->get('rtm.lists.getList');
-foreach($tasks->getLists()->getList() as $list)
+try
 {
-    echo '<a href="' . $list->getId() . '">' . $list->getName() . '</a><br />';
-}
+    // Check authentication token
+    $rtm->auth->checkToken();
 
+    // Successfully authenticated, redirect to app
+    header('Location: index.php');
+}
+catch(Exception $e)
+{
+    // Authentication request is taking place?
+    if(isset($_GET['frob']))
+    {
+        try
+        {
+            $response = $rtm->auth->getToken($_GET['frob']);
+            $_SESSION['RTM_AUTH_TOKEN'] = $response->getAuth()->getToken();
+
+            header('Location: rtm.php');
+        }
+        catch(Exception $e)
+        {
+            echo 'Authentication somewhat failed...';
+        }
+    }
+    else
+    {
+        // No permissions, acquire it
+        header('Location: ' . $rtm->getAuthUrl('delete'));
+    }
+}
