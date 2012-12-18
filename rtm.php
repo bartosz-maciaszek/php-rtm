@@ -23,6 +23,10 @@ catch(Exception $e)
             $response = $rtm->auth->getToken($_GET['frob']);
             $_SESSION['RTM_AUTH_TOKEN'] = $response->getAuth()->getToken();
 
+            // Check authentication token
+            $rtm->auth->checkToken();
+
+            // Authentication successful
             header('Location: rtm.php');
         }
         catch(Exception $e)
