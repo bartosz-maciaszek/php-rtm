@@ -6,7 +6,7 @@ use Rtm\Rtm;
 
 class Lists extends AbstractService
 {
-    public function add($name, $filter, $timeline = 0)
+    public function add($name, $filter = null, $timeline = 0)
     {
         $params = array(
             'name'     => $name,
@@ -16,12 +16,60 @@ class Lists extends AbstractService
 
         return $this->rtm->get(Rtm::METHOD_LISTS_ADD, $params);
     }
+    
+    public function archive($listId, $timeline = 0)
+    {
+        $params = array(
+            'list_id'  => $listId,
+            'timeline' => $timeline
+        );
+        
+        return $this->rtm->get(Rtm::METHOD_LISTS_ARCHIVE, $params);
+    }
+    
+    public function delete($listId, $timeline = 0)
+    {
+        $params = array(
+            'list_id'  => $listId,
+            'timeline' => $timeline
+        );
+        
+        return $this->rtm->get(Rtm::METHOD_LISTS_DELETE, $params);
+    }
+    
+    public function getList()
+    {
+        return $this->rtm->get(RTM::METHOD_LISTS_GET_LIST)->getLists()->getList();
+    }
+    
+    public function setDefaultList($listId, $timeline = 0)
+    {
+        $params = array(
+            'list_id'  => $listId,
+            'timeline' => $timeline
+        );
+        
+        return $this->rtm->get(Rtm::METHOD_LISTS_SET_DEFAULT, $params);
+    }
+    
+    public function setName($listId, $name, $timeline = 0)
+    {
+        $params = array(
+            'list_id'  => $listId,
+            'name'     => $name,
+            'timeline' => $timeline
+        );
+        
+        return $this->rtm->get(Rtm::METHOD_LISTS_SET_NAME, $params);
+    }
+    
+    public function unarchive($listId, $timeline = 0)
+    {
+        $params = array(
+            'list_id'  => $listId,
+            'timeline' => $timeline
+        );
+        
+        return $this->rtm->get(Rtm::METHOD_LISTS_UNARCHIVE, $params);
+    }
 }
-
-// rtm.lists.add
-// rtm.lists.archive
-// rtm.lists.delete
-// rtm.lists.getList
-// rtm.lists.setDefaultList
-// rtm.lists.setName
-// rtm.lists.unarchive
