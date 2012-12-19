@@ -43,6 +43,16 @@ class DataContainer implements IteratorAggregate, Countable
         return count($this->attributes);
     }
 
+    public function get($name, $default = null)
+    {
+        return $this->getAttribute($name, $default);
+    }
+
+    public function set($name, $value)
+    {
+        return $this->setAttribute($name, $value);
+    }
+
     private function setAttribute($name, $value)
     {
         $this->attributes->offsetSet($name, $value);
