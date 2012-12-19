@@ -17,11 +17,3 @@ class Lists extends AbstractService
         return $this->rtm->get(Rtm::METHOD_LISTS_ADD, $params);
     }
 }
-
-// rtm.lists.add
-// rtm.lists.archive
-// rtm.lists.delete
-// rtm.lists.getList
-// rtm.lists.setDefaultList
-// rtm.lists.setName
-// rtm.lists.unarchive
