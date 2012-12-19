@@ -4,7 +4,7 @@ require_once 'bootstrap.php';
 
 use Rtm\Rtm;
 
-$rtm = new \Rtm\Rtm(API_KEY, SECRET);
+$rtm = new Rtm(API_KEY, SECRET);
 $rtm->setAuthToken(isset($_SESSION['RTM_AUTH_TOKEN']) ? $_SESSION['RTM_AUTH_TOKEN'] : null);
 
 try

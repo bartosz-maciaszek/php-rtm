@@ -2,8 +2,6 @@
 
 namespace Rtm;
 
-use stdClass;
-
 class Response
 {
     private $response = null;

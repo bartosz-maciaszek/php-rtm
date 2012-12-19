@@ -11,21 +11,15 @@ try
 {
     // Check authentication token
     $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
-
-    echo '<pre>';
-    print_r($rtm->getService(Rtm::SERVICE_GROUPS)->getList());
-    exit;
-
-    $tasks = $rtm->get('rtm.lists.getList');
-    foreach($tasks->getLists()->getList() as $list)
-    {
-        echo '<a href="' . $list->getId() . '">' . $list->getName() . '</a><br />';
-    }
 }
 catch(Exception $e)
 {
     // No perrmissions, let's get it
-    echo $e->getMessage();
-
-    //header('Location: rtm.php');
+    header('Location: rtm.php');
 }
+
+$tasks = $rtm->getService(Rtm::SERVICE_LISTS);
+
+echo '<pre>';
+print_r($tasks->getList());
+exit;
