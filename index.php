@@ -13,7 +13,7 @@ try
     $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
 
     echo '<pre>';
-    print_r($rtm->getService(Rtm::SERVICE_TIME)->parse('monday'));
+    print_r($rtm->getService(Rtm::SERVICE_TEST)->login());
     exit;
 
     $tasks = $rtm->get('rtm.lists.getList');

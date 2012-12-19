@@ -19,6 +19,7 @@ require_once 'Rtm/Service/Lists.php';
 require_once 'Rtm/Service/Locations.php';
 require_once 'Rtm/Service/Reflection.php';
 require_once 'Rtm/Service/Settings.php';
+require_once 'Rtm/Service/Test.php';
 require_once 'Rtm/Service/Time.php';
 require_once 'Rtm/Service/Timelines.php';
 require_once 'Rtm/Service/Timezones.php';

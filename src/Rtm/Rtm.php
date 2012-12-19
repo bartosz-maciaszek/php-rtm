@@ -19,6 +19,7 @@ class Rtm
     const SERVICE_LOCATIONS     = 'Rtm\Service\Locations';
     const SERVICE_REFLECTION    = 'Rtm\Service\Reflection';
     const SERVICE_SETTINGS      = 'Rtm\Service\Settings';
+    const SERVICE_TEST          = 'Rtm\Service\Test';
     const SERVICE_TIME          = 'Rtm\Service\Time';
     const SERVICE_TIMELINES     = 'Rtm\Service\Timelines';
     const SERVICE_TIMEZONES     = 'Rtm\Service\Timezones';
@@ -49,6 +50,9 @@ class Rtm
     const METHOD_REFLECTION_GET_METHODS     = 'rtm.reflection.getMethods';
 
     const METHOD_SETTINGS_GET_LIST = 'rtm.settings.getList';
+
+    const METHOD_TEST_ECHO = 'rtm.test.echo';
+    const METHOD_TEST_LOGIN = 'rtm.test.login';
 
     const METHOD_TIME_CONVERT = 'rtm.time.convert';
     const METHOD_TIME_PARSE   = 'rtm.time.parse';
