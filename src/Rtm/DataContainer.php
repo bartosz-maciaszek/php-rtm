@@ -9,11 +9,11 @@ use Countable;
 
 class DataContainer implements IteratorAggregate, Countable
 {
-    private $_attributes = null;
+    private $attributes = null;
 
     public function __construct(array $data = array())
     {
-        $this->_attributes = new ArrayObject($data);
+        $this->attributes = new ArrayObject($data);
     }
 
     public function __call($method, array $arguments)
@@ -40,19 +40,19 @@ class DataContainer implements IteratorAggregate, Countable
 
     public function count()
     {
-        return count($this->_attributes);
+        return count($this->attributes);
     }
 
     private function setAttribute($name, $value)
     {
-        $this->_attributes->offsetSet($name, $value);
+        $this->attributes->offsetSet($name, $value);
     }
 
     private function getAttribute($name, $default = null)
     {
-        if($this->_attributes->offsetExists($name))
+        if($this->attributes->offsetExists($name))
         {
-            return $this->_attributes->offsetGet($name);
+            return $this->attributes->offsetGet($name);
         }
 
         return $default;
@@ -60,19 +60,19 @@ class DataContainer implements IteratorAggregate, Countable
 
     public function toStdClass()
     {
-        foreach($this->_attributes as $key => $attribute)
+        foreach($this->attributes as $key => $attribute)
         {
-            if($attribute instanceof NA_Soap_DataContainer)
+            if($attribute instanceof DataContainer)
             {
                 $this->setAttribute($key, $attribute->toStdClass());
             }
         }
 
-        return (object) (array) $this->_attributes;
+        return (object) (array) $this->attributes;
     }
 
     public function getIterator()
     {
-        return new ArrayIterator($this->_attributes);
+        return new ArrayIterator($this->attributes);
     }
 }
