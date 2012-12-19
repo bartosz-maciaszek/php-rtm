@@ -24,4 +24,22 @@ catch(Exception $e)
         {
             $response = $rtm->getService(Rtm::SERVICE_AUTH)->getToken($_GET['frob']);
             $_SESSION['RTM_AUTH_TOKEN'] = $response->getToken();
-          
+            $rtm->setAuthToken($response->getToken());
+
+            // Check authentication token
+            $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
+
+            // Authentication successful
+            header('Location: rtm.php');
+        }
+        catch(Exception $e)
+        {
+            echo 'Authentication somewhat failed...';
+        }
+    }
+    else
+    {
+        // No permissions, acquire it
+        header('Location: ' . $rtm->getAuthUrl('delete'));
+    }
+}
