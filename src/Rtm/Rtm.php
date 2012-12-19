@@ -4,14 +4,29 @@ namespace Rtm;
 
 class Rtm
 {
+    /**
+     * URLs
+     */
     const URL_SERVICE = 'http://api.rememberthemilk.com/services/rest/';
     const URL_AUTH    = 'http://www.rememberthemilk.com/services/auth/';
 
-    const SERVICE_AUTH      = 'Rtm\Service\Auth';
-    const SERVICE_CONTACTS  = 'Rtm\Service\Contacts';
-    const SERVICE_LISTS     = 'Rtm\Service\Lists';
-    const SERVICE_TIMELINES = 'Rtm\Service\Timelines';
+    /**
+     * Available services
+     */
+    const SERVICE_AUTH          = 'Rtm\Service\Auth';
+    const SERVICE_CONTACTS      = 'Rtm\Service\Contacts';
+    const SERVICE_LISTS         = 'Rtm\Service\Lists';
+    const SERVICE_LOCATIONS     = 'Rtm\Service\Locations';
+    const SERVICE_REFLECTION    = 'Rtm\Service\Reflection';
+    const SERVICE_SETTINGS      = 'Rtm\Service\Settings';
+    const SERVICE_TIME          = 'Rtm\Service\Time';
+    const SERVICE_TIMELINES     = 'Rtm\Service\Timelines';
+    const SERVICE_TIMEZONES     = 'Rtm\Service\Timezones';
+    const SERVICE_TRANSACTIONS  = 'Rtm\Service\Transactions';
 
+    /**
+     * Available methods
+     */
     const METHOD_AUTH_GET_TOKEN   = 'rtm.auth.getToken';
     const METHOD_AUTH_GET_FROB    = 'rtm.auth.getFrob';
     const METHOD_AUTH_CHECK_TOKEN = 'rtm.auth.checkToken';
@@ -28,7 +43,21 @@ class Rtm
     const METHOD_LISTS_SET_NAME    = 'rtm.lists.setName';
     const METHOD_LISTS_UNARCHIVE   = 'rtm.lists.unarchive';
 
+    const METHOD_LOCATIONS_GET_LIST = 'rtm.locations.getList';
+
+    const METHOD_REFLECTION_GET_METHOD_INFO = 'rtm.reflection.getMethodInfo';
+    const METHOD_REFLECTION_GET_METHODS     = 'rtm.reflection.getMethods';
+
+    const METHOD_SETTINGS_GET_LIST = 'rtm.settings.getList';
+
+    const METHOD_TIME_CONVERT = 'rtm.time.convert';
+    const METHOD_TIME_PARSE   = 'rtm.time.parse';
+
     const METHOD_TIMELINES_CREATE  = 'rtm.timelines.create';
+
+    const METHOD_TIMEZONES_GET_LIST  = 'rtm.timezones.getList';
+
+    const METHOD_TRANSACTIONS_UNDO  = 'rtm.transactions.undo';
 
     private $apiKey = null;
 

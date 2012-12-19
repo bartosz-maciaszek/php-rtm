@@ -13,7 +13,7 @@ try
     $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
 
     echo '<pre>';
-    print_r($rtm->getService(Rtm::SERVICE_LISTS)->getList());
+    print_r($rtm->getService(Rtm::SERVICE_TIME)->parse('monday'));
     exit;
 
     $tasks = $rtm->get('rtm.lists.getList');
@@ -25,5 +25,7 @@ try
 catch(Exception $e)
 {
     // No perrmissions, let's get it
-    header('Location: rtm.php');
+    echo $e->getMessage();
+
+    //header('Location: rtm.php');
 }
