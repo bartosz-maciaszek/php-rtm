@@ -30,7 +30,7 @@ require_once 'Rtm/Service/Transactions.php';
 
 // API keys
 define('API_KEY', '77bab94ee2471173898a8cec8c901692');
-define('SECRET',  '3d8bfb94932039e3');
+define('SECRET',  '');
 
 // Start the session
 session_start();
