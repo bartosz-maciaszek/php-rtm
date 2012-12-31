@@ -29,8 +29,8 @@ require_once 'Rtm/Service/Timezones.php';
 require_once 'Rtm/Service/Transactions.php';
 
 // API keys
-define('API_KEY', '77bab94ee2471173898a8cec8c901692');
-define('SECRET',  '');
+define('API_KEY', '<your api key here>');
+define('SECRET',  '<your secret here>');
 
 // Start the session
 session_start();
