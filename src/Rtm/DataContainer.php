@@ -27,7 +27,7 @@ class DataContainer implements \IteratorAggregate, \Countable
     {
         return new \ArrayIterator($this->attributes);
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Countable::count()
@@ -36,12 +36,12 @@ class DataContainer implements \IteratorAggregate, \Countable
     {
         return count($this->attributes);
     }
-    
+
     /**
      * Magic method to catch set{attribute}() and get{attribute}() calls.
      * @param string $method
      * @param array $arguments
-     * @throws Exception
+     * @throws BadMethodCallException
      * @return \Rtm\DataContainer|mixed
      */
     public function __call($method, array $arguments)
@@ -62,12 +62,12 @@ class DataContainer implements \IteratorAggregate, \Countable
                 break;
 
             default:
-                throw new Exception(sprintf('Method %s not implemented', $method));
+                throw new \BadMethodCallException(sprintf('Method %s not implemented', $method));
         }
     }
 
     /**
-     * Get the value on the attribute 
+     * Get the value on the attribute
      * @param string $name
      * @param mixed $default
      * @return mixed
@@ -78,7 +78,7 @@ class DataContainer implements \IteratorAggregate, \Countable
         {
             return $this->attributes[$name];
         }
-        
+
         return $default;
     }
 
@@ -93,7 +93,7 @@ class DataContainer implements \IteratorAggregate, \Countable
         $this->attributes[$name] = $value;
         return $this;
     }
-    
+
     /**
      * Check whether we have such an attribute
      * @param string $name
