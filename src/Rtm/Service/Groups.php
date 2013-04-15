@@ -13,7 +13,7 @@ class Groups extends AbstractService
             'timeline' => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_GROUPS_ADD, $params);
+        return $this->rtm->call(Rtm::METHOD_GROUPS_ADD, $params);
     }
 
     public function addContact($groupId, $contactId, $timeline = 0)
@@ -24,7 +24,7 @@ class Groups extends AbstractService
             'timeline'   => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_GROUPS_ADD_CONTACT, $params);
+        return $this->rtm->call(Rtm::METHOD_GROUPS_ADD_CONTACT, $params);
     }
 
     public function delete($groupId, $timeline = 0)
@@ -34,12 +34,12 @@ class Groups extends AbstractService
             'timeline' => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_GROUPS_DELETE, $params);
+        return $this->rtm->call(Rtm::METHOD_GROUPS_DELETE, $params);
     }
 
     public function getList()
     {
-        return $this->rtm->get(Rtm::METHOD_GROUPS_GET_LIST)->getGroups();
+        return $this->rtm->call(Rtm::METHOD_GROUPS_GET_LIST)->getGroups();
     }
 
     public function removeContact($groupId, $contactId, $timeline = 0)
@@ -50,6 +50,6 @@ class Groups extends AbstractService
             'timeline'   => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_GROUPS_REMOVE_CONTACT, $params);
+        return $this->rtm->call(Rtm::METHOD_GROUPS_REMOVE_CONTACT, $params);
     }
 }

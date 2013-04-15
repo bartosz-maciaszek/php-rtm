@@ -8,6 +8,6 @@ class Timezones extends AbstractService
 {
     public function getList()
     {
-        return $this->rtm->get(Rtm::METHOD_TIMEZONES_GET_LIST)->getTimezones()->getTimezone();
+        return $this->rtm->call(Rtm::METHOD_TIMEZONES_GET_LIST)->getTimezones()->getTimezone();
     }
 }

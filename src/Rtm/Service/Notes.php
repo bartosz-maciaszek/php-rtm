@@ -17,7 +17,7 @@ class Notes extends AbstractService
             'timeline'      => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_NOTES_ADD, $params);
+        return $this->rtm->call(Rtm::METHOD_NOTES_ADD, $params);
     }
 
     public function delete($noteId, $timeline = 0)
@@ -27,7 +27,7 @@ class Notes extends AbstractService
             'timeline' => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_NOTES_DELETE, $params);
+        return $this->rtm->call(Rtm::METHOD_NOTES_DELETE, $params);
     }
 
     public function edit($noteId, $noteTitle, $noteText, $timeline = 0)
@@ -39,6 +39,6 @@ class Notes extends AbstractService
             'timeline'   => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_NOTES_EDIT, $params);
+        return $this->rtm->call(Rtm::METHOD_NOTES_EDIT, $params);
     }
 }

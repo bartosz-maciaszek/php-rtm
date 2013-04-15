@@ -2,7 +2,7 @@
 
 namespace Rtm;
 
-class Client
+class Client implements ClientInterface
 {
     /**
      * Rtm object
@@ -10,29 +10,28 @@ class Client
      */
     private $rtm = null;
 
-    public function __construct(Rtm $rtm)
+    public function setRtm(RtmInterface $rtm)
     {
         $this->rtm = $rtm;
     }
 
-    public function get($method, array $params = array())
+    public function call($method, array $params = array())
     {
         $request = new Request($params);
         $request->setParameter('method', $method);
 
-        if($request->hasParameter('api_key') === false)
-        {
+        if (false === $request->hasParameter('api_key')) {
             $request->setParameter('api_key', $this->rtm->getApiKey());
         }
 
-        if($request->hasParameter('format') === false)
-        {
-            $request->setParameter('format', $this->rtm->getResponseFormat());
+        if (false === $request->hasParameter('auth_token')) {
+            $request->setParameter('auth_token', $this->rtm->getAuthToken());
         }
 
-        if($request->hasParameter('auth_token') === false)
-        {
-            $request->setParameter('auth_token', $this->rtm->getAuthToken());
+        if (false === $request->hasParameter('format')) {
+            if (null != $this->rtm->getResponseFormat()) {
+                $request->setParameter('format', $this->rtm->getResponseFormat());
+            }
         }
 
         $request->sign($this->rtm->getSecret());
@@ -43,8 +42,7 @@ class Client
 
         $response = new Response($contents, $this->rtm->getResponseFormat());
 
-        if ($response->isValid() === false)
-        {
+        if (false === $response->isValid()) {
             throw new \Exception($response->getErrorMessage(), $response->getErrorCode());
         }
 

@@ -8,6 +8,6 @@ class Locations extends AbstractService
 {
     public function getList()
     {
-        return $this->rtm->get(Rtm::METHOD_LOCATIONS_GET_LIST)->getLocations()->getLocation();
+        return $this->rtm->call(Rtm::METHOD_LOCATIONS_GET_LIST)->getLocations()->getLocation();
     }
 }

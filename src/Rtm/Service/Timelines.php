@@ -8,6 +8,6 @@ class Timelines extends AbstractService
 {
     public function create()
     {
-        return $this->rtm->get(Rtm::METHOD_TIMELINES_CREATE)->getTimeline();
+        return $this->rtm->call(Rtm::METHOD_TIMELINES_CREATE)->getTimeline();
     }
 }

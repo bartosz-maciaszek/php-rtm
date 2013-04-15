@@ -8,10 +8,19 @@ class Request
 
     public function __construct(array $parameters = null)
     {
-        if (is_array($parameters))
-        {
-            $this->parameters = $parameters;
+        if (is_array($parameters)) {
+            $this->setParameters($parameters);
         }
+    }
+
+    public function setParameters(array $parameters)
+    {
+        $this->parameters = array_merge($this->parameters, $parameters);
+    }
+
+    public function getParameters()
+    {
+        return $this->parameters;
     }
 
     public function setParameter($name, $value)
@@ -21,8 +30,7 @@ class Request
 
     public function getParameter($name, $default = null)
     {
-        if ($this->hasParameter($name) === false)
-        {
+        if (false === $this->hasParameter($name)) {
             return $default;
         }
 
@@ -42,10 +50,8 @@ class Request
 
         $sig = '';
 
-        foreach ($params as $key => $val)
-        {
-            if ($val != '')
-            {
+        foreach ($params as $key => $val) {
+            if ($val != '') {
                 $sig .= $key . $val;
             }
         }

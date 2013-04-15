@@ -13,6 +13,6 @@ class Transactions extends AbstractService
             'timeline'       => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_TRANSACTIONS_UNDO, $params);
+        return $this->rtm->call(Rtm::METHOD_TRANSACTIONS_UNDO, $params);
     }
 }

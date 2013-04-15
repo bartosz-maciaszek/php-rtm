@@ -2,7 +2,7 @@
 
 namespace Rtm;
 
-class Rtm
+class Rtm implements RtmInterface
 {
     /**
      * URLs
@@ -95,6 +95,10 @@ class Rtm
 
     const METHOD_TRANSACTIONS_UNDO  = 'rtm.transactions.undo';
 
+    const AUTH_TYPE_READ   = 'read';
+    const AUTH_TYPE_WRITE  = 'write';
+    const AUTH_TYPE_DELETE = 'delete';
+
     private $apiKey = null;
 
     private $secret = null;
@@ -107,17 +111,18 @@ class Rtm
 
     private $client = null;
 
-    private $timeline = 0;
+    private $timeline = null;
 
     private $services = array();
 
-    public function __construct($apiKey, $secret, $responseFormat = 'json')
+    public function __construct(array $config = array())
     {
-        $this->setApiKey($apiKey);
-        $this->setSecret($secret);
-        $this->setResponseFormat($responseFormat);
-
-        $this->client = new Client($this);
+        foreach ($config as $key => $value) {
+            $method = 'set' . $key;
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
     }
 
     public function getService($name)
@@ -130,6 +135,21 @@ class Rtm
         return $this->services[$name];
     }
 
+    public function setClient(ClientInterface $client)
+    {
+        $client->setRtm($this);
+        $this->client = $client;
+    }
+
+    public function getClient()
+    {
+        if (null === $this->client) {
+            $this->setClient(new Client);
+        }
+
+        return $this->client;
+    }
+
     public function setFrob($frob)
     {
         $this->frob = $frob;
@@ -138,6 +158,10 @@ class Rtm
 
     public function getFrob()
     {
+        if (false === isset($this->frob)) {
+            throw new Exception('Frob not set');
+        }
+
         return $this->frob;
     }
 
@@ -149,6 +173,10 @@ class Rtm
 
     public function getTimeline()
     {
+        if (false === isset($this->timeline)) {
+            throw new Exception('Timeline not set');
+        }
+
         return $this->timeline;
     }
 
@@ -160,6 +188,10 @@ class Rtm
 
     public function getApiKey()
     {
+        if (false === isset($this->apiKey)) {
+            throw new Exception('Api key not set');
+        }
+
         return $this->apiKey;
     }
 
@@ -171,6 +203,10 @@ class Rtm
 
     public function getSecret()
     {
+        if (false === isset($this->secret)) {
+            throw new Exception('Secret not set');
+        }
+
         return $this->secret;
     }
 
@@ -182,11 +218,19 @@ class Rtm
 
     public function getAuthToken()
     {
+        if (false === isset($this->authToken)) {
+            throw new Exception('Auth token not set');
+        }
+
         return $this->authToken;
     }
 
     public function setResponseFormat($responseFormat)
     {
+        if (!preg_match('/^(json|rest)$/', $responseFormat)) {
+            throw new \InvalidArgumentException('Response type should be \'rest\' or \'json\'.');
+        }
+
         $this->responseFormat = $responseFormat;
         return $this;
     }
@@ -196,12 +240,12 @@ class Rtm
         return $this->responseFormat;
     }
 
-    public function get($method, array $params = array())
+    public function call($method, array $params = array())
     {
-        return $this->client->get($method, $params);
+        return $this->client->call($method, $params);
     }
 
-    public function getAuthUrl($perms = 'read')
+    public function getAuthUrl($perms = self::AUTH_TYPE_READ)
     {
 //         if (!$this->frob)
 //         {

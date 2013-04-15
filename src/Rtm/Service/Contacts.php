@@ -13,7 +13,7 @@ class Contacts extends AbstractService
             'timeline' => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_CONTACTS_ADD, $params);
+        return $this->rtm->call(Rtm::METHOD_CONTACTS_ADD, $params);
     }
 
     public function delete($id, $timeline = 0)
@@ -23,11 +23,11 @@ class Contacts extends AbstractService
             'timeline'   => $timeline
         );
 
-        return $this->rtm->get(Rtm::METHOD_CONTACTS_DELETE, $params);
+        return $this->rtm->call(Rtm::METHOD_CONTACTS_DELETE, $params);
     }
 
     public function getList()
     {
-        return $this->rtm->get(Rtm::METHOD_CONTACTS_GET_LIST)->getContacts();
+        return $this->rtm->call(Rtm::METHOD_CONTACTS_GET_LIST)->getContacts();
     }
 }

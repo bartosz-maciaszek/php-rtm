@@ -8,6 +8,6 @@ class Settings extends AbstractService
 {
     public function getList()
     {
-        return $this->rtm->get(Rtm::METHOD_SETTINGS_GET_LIST)->getSettings();
+        return $this->rtm->call(Rtm::METHOD_SETTINGS_GET_LIST)->getSettings();
     }
 }

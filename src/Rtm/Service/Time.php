@@ -14,7 +14,7 @@ class Time extends AbstractService
             'time' => $time
         );
 
-        return $this->rtm->get(Rtm::METHOD_TIME_CONVERT, $params)->getTime();
+        return $this->rtm->call(Rtm::METHOD_TIME_CONVERT, $params)->getTime();
     }
 
     public function parse($text, $timezone = null, $dateFormat = null)
@@ -25,6 +25,6 @@ class Time extends AbstractService
             'dateformat' => $dateFormat
         );
 
-        return $this->rtm->get(Rtm::METHOD_TIME_PARSE, $params)->getTime();
+        return $this->rtm->call(Rtm::METHOD_TIME_PARSE, $params)->getTime();
     }
 }

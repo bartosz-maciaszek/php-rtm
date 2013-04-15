@@ -49,8 +49,7 @@ class DataContainer implements \IteratorAggregate, \Countable
         $methodType    = substr($method, 0, 3);
         $attributeName = strtolower(substr($method, 3, 1)) . substr($method, 4);
 
-        switch($methodType)
-        {
+        switch ($methodType) {
             case 'set':
                 $this->set($attributeName, $arguments[0]);
                 return $this;
@@ -74,8 +73,7 @@ class DataContainer implements \IteratorAggregate, \Countable
      */
     public function get($name, $default = null)
     {
-        if($this->has($name))
-        {
+        if ($this->has($name)) {
             return $this->attributes[$name];
         }
 
@@ -109,10 +107,8 @@ class DataContainer implements \IteratorAggregate, \Countable
      */
     public function toArray()
     {
-        foreach($this as $key => $attribute)
-        {
-            if($attribute instanceof DataContainer)
-            {
+        foreach ($this as $key => $attribute) {
+            if ($attribute instanceof DataContainer) {
                 $this->set($key, $attribute->toArray());
             }
         }
