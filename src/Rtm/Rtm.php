@@ -125,24 +125,59 @@ class Rtm
 
     const METHOD_TRANSACTIONS_UNDO  = 'rtm.transactions.undo';
 
+    /**
+     * Available auth types
+     */
     const AUTH_TYPE_READ   = 'read';
     const AUTH_TYPE_WRITE  = 'write';
     const AUTH_TYPE_DELETE = 'delete';
 
-    private $apiKey = null;
-
-    private $secret = null;
-
-    private $authToken = null;
-
-    private $frob = null;
-
+    /**
+     * Client instance
+     * @var ClientInterface
+     */
     private $client = null;
 
+    /**
+     * API key
+     * @var string
+     */
+    private $apiKey = null;
+
+    /**
+     * Secret
+     * @var string
+     */
+    private $secret = null;
+
+    /**
+     * Auth token
+     * @var string
+     */
+    private $authToken = null;
+
+    /**
+     * Frob
+     * @var string
+     */
+    private $frob = null;
+
+    /**
+     * Timeline
+     * @var string
+     */
     private $timeline = null;
 
+    /**
+     * Services array
+     * @var array
+     */
     private $services = array();
 
+    /**
+     * Constructor
+     * @param array $config Configuration
+     */
     public function __construct(array $config = array())
     {
         foreach ($config as $key => $value) {
@@ -153,22 +188,36 @@ class Rtm
         }
     }
 
+    /**
+     * Returns instance of service
+     * @param  string $name Service name
+     * @return AbstractService
+     */
     public function getService($name)
     {
-        if(!isset($this->services[$name]))
-        {
+        if (!isset($this->services[$name])) {
             $this->services[$name] = new $name($this);
         }
 
         return $this->services[$name];
     }
 
+    /**
+     * Set client instance
+     * @param ClientInterface $client
+     * @return Rtm
+     */
     public function setClient(ClientInterface $client)
     {
         $client->setRtm($this);
         $this->client = $client;
+        return $this;
     }
 
+    /**
+     * Get client instance
+     * @return ClientInterface
+     */
     public function getClient()
     {
         if (null === $this->client) {
@@ -178,12 +227,22 @@ class Rtm
         return $this->client;
     }
 
+    /**
+     * Set frob
+     * @param string $frob
+     * @return Rtm
+     */
     public function setFrob($frob)
     {
         $this->frob = $frob;
         return $this;
     }
 
+    /**
+     * Get frob
+     * @return string
+     * @throws Rtm\Exception If frob is not set
+     */
     public function getFrob()
     {
         if (false === isset($this->frob)) {
@@ -193,12 +252,22 @@ class Rtm
         return $this->frob;
     }
 
+   /**
+     * Set timeline
+     * @param string $timeline
+     * @return Rtm
+     */
     public function setTimeline($timeline)
     {
         $this->timeline = $timeline;
         return $this;
     }
 
+    /**
+     * Get timeline
+     * @return string
+     * @throws Rtm\Exception If timeline is not set
+     */
     public function getTimeline()
     {
         if (false === isset($this->timeline)) {
@@ -208,27 +277,47 @@ class Rtm
         return $this->timeline;
     }
 
+    /**
+     * Set API key
+     * @param string $apiKey
+     * @return Rtm
+     */
     public function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
         return $this;
     }
 
+    /**
+     * Get API key
+     * @return string
+     * @throws Rtm\Exception If API key is not set
+     */
     public function getApiKey()
     {
         if (false === isset($this->apiKey)) {
-            throw new Exception('Api key not set');
+            throw new Exception('API key not set');
         }
 
         return $this->apiKey;
     }
 
+    /**
+     * Set secret
+     * @param string $secret
+     * @return Rtm
+     */
     public function setSecret($secret)
     {
         $this->secret = $secret;
         return $this;
     }
 
+    /**
+     * Get secret
+     * @return string
+     * @throws Rtm\Exception If secret is not set
+     */
     public function getSecret()
     {
         if (false === isset($this->secret)) {
@@ -238,12 +327,22 @@ class Rtm
         return $this->secret;
     }
 
+    /**
+     * Set auth token
+     * @param string $authToken
+     * @return Rtm
+     */
     public function setAuthToken($authToken)
     {
         $this->authToken = $authToken;
         return $this;
     }
 
+    /**
+     * Get auth token
+     * @return string
+     * @throws Rtm\Exception If auth token is not set
+     */
     public function getAuthToken()
     {
         if (false === isset($this->authToken)) {
@@ -253,15 +352,25 @@ class Rtm
         return $this->authToken;
     }
 
+    /**
+     * Makes a request to the API
+     * @param  string $method
+     * @param  array  $params
+     * @return mixed
+     */
     public function call($method, array $params = array())
     {
         return $this->getClient()->call($method, $params);
     }
 
+    /**
+     * Returns auth URL for user to authenticate the application
+     * @param  string $perms Permission you need (read, write or delete)
+     * @return string
+     */
     public function getAuthUrl($perms = self::AUTH_TYPE_READ)
     {
-//         if (!$this->frob)
-//         {
+//         if (!$this->frob) {
 //             $this->auth->getFrob();
 //         }
 

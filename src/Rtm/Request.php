@@ -34,8 +34,16 @@ namespace Rtm;
 
 class Request
 {
+    /**
+     * Request parameters
+     * @var array
+     */
     private $parameters = array();
 
+    /**
+     * Constructor, set the parameters optionally
+     * @param array
+     */
     public function __construct(array $parameters = null)
     {
         if (is_array($parameters)) {
@@ -43,21 +51,40 @@ class Request
         }
     }
 
+    /**
+     * Set request parameters
+     * @param array $parameters
+     */
     public function setParameters(array $parameters)
     {
         $this->parameters = array_merge($this->parameters, $parameters);
     }
 
+    /**
+     * Get all request parameters
+     * @return array
+     */
     public function getParameters()
     {
         return $this->parameters;
     }
 
+    /**
+     * Set one parameter
+     * @param string $name  Parameter name
+     * @param mixed  $value Parameter value
+     */
     public function setParameter($name, $value)
     {
         $this->parameters[$name] = $value;
     }
 
+    /**
+     * Get one parameter
+     * @param  string $name    Parameter name
+     * @param  mixed  $default Default value to return if parameter is not set
+     * @return mixed
+     */
     public function getParameter($name, $default = null)
     {
         if (false === $this->hasParameter($name)) {
@@ -67,11 +94,21 @@ class Request
         return $this->parameters[$name];
     }
 
+    /**
+     * Check whether parameter is set
+     * @param  string  $name Parameter name
+     * @return boolean
+     */
     public function hasParameter($name)
     {
         return isset($this->parameters[$name]);
     }
 
+    /**
+     * Sign the request in accordance to RTM manual.
+     * Method adds parameter api_sig with appropriate value
+     * @param  string $secret Secret
+     */
     public function sign($secret)
     {
         $params = $this->parameters;
@@ -89,11 +126,19 @@ class Request
         $this->setParameter('api_sig', md5($secret . $sig));
     }
 
+    /**
+     * Get service URL to call (with appropriate parameters)
+     * @return string
+     */
     public function getServiceUrl()
     {
         return Rtm::URL_SERVICE . '?' . http_build_query($this->parameters);
     }
 
+    /**
+     * Get auth URL to call (with appropriate parameters)
+     * @return string
+     */
     public function getAuthUrl()
     {
         return Rtm::URL_AUTH . '?' . http_build_query($this->parameters);

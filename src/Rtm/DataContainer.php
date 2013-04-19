@@ -79,7 +79,7 @@ class DataContainer implements \IteratorAggregate, \Countable
         if (!preg_match('/^(set|get|has|remove)(\w+)$/', $method, $matches)) {
             throw new \BadMethodCallException(sprintf('Method %s not implemented', $method));
         }
-        
+
         $methodType    = $matches[1];
         $attributeName = lcfirst($matches[2]);
 

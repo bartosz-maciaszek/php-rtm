@@ -34,7 +34,18 @@ namespace Rtm;
 
 interface ClientInterface
 {
+   /**
+     * Set Rtm object
+     * @param Rtm $rtm
+     */
     public function setRtm(Rtm $rtm);
 
+    /**
+     * Makes a request to RTM API
+     * @param  string $method
+     * @param  array  $params
+     * @return DataContainer
+     * @throws Rtm\Exception If response is not valid
+     */
     public function call($method, array $params = array());
 }

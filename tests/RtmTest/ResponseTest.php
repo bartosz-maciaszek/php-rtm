@@ -49,6 +49,8 @@ class ResponseTest extends TestCase
 
         $this->assertEquals('bar', $response->getResponse()->getFoo());
         $this->assertEquals('quux', $response->getResponse()->getBaz());
+        $this->assertNull($response->getErrorMessage());
+        $this->assertNull($response->getErrorCode());
     }
 
     public function testHandleComplexSuccessfulResponse()
@@ -69,6 +71,9 @@ class ResponseTest extends TestCase
         $this->assertEquals('bar2', $response->getResponse()->getParam3()->getParam2());
         $this->assertEquals('foo3', $response->getResponse()->getParam3()->getParam3()->getParam1());
         $this->assertEquals('bar3', $response->getResponse()->getParam3()->getParam3()->getParam2());
+
+        $this->assertNull($response->getErrorMessage());
+        $this->assertNull($response->getErrorCode());
     }
 
     public function testHandleSimpleErrorResponse()

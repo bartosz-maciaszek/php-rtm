@@ -34,6 +34,11 @@ namespace Rtm;
 
 class Toolkit
 {
+    /**
+     * Converts mixed type to DataContainer recursively
+     * @param  mixed $d
+     * @return mixed|DataContainer
+     */
     public static function arrayToDataContainer($d)
     {
         return is_array($d) ? new DataContainer(array_map(__METHOD__, $d)) : $d;

@@ -34,8 +34,22 @@ namespace Rtm;
 
 class Response
 {
+    /**
+     * JSON Response
+     * @var string
+     */
     private $response = null;
 
+    /**
+     * Stat OK
+     * @var string
+     */
+    const STAT_OK = 'ok';
+
+    /**
+     * Constructor
+     * @param string $response JSON response
+     */
     public function __construct($response = null)
     {
         if (null !== $response) {
@@ -43,26 +57,50 @@ class Response
         }
     }
 
+    /**
+     * Set response
+     * @param string $json JSON response
+     */
     public function setResponse($json)
     {
         $this->response = Toolkit::arrayToDataContainer(json_decode($json, true));
     }
 
+    /**
+     * Is response valid?
+     * @return boolean
+     */
     public function isValid()
     {
-        return $this->response->getRsp()->getStat() == 'ok';
+        return $this->response->getRsp()->getStat() == self::STAT_OK;
     }
 
+    /**
+     * Get error message (if any)
+     * @return string|null
+     */
     public function getErrorMessage()
     {
-        return $this->response->getRsp()->getErr()->getMsg();
+        if ($this->response->getRsp()->hasErr()) {
+            return $this->response->getRsp()->getErr()->getMsg();
+        }
     }
 
+    /**
+     * Get error code (if any)
+     * @return int|null
+     */
     public function getErrorCode()
     {
-        return $this->response->getRsp()->getErr()->getCode();
+        if ($this->response->getRsp()->hasErr()) {
+            return $this->response->getRsp()->getErr()->getCode();
+        }
     }
 
+    /**
+     * Get the whole response
+     * @return DataContainer
+     */
     public function getResponse()
     {
         return $this->response->getRsp();
