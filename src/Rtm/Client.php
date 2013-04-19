@@ -2,6 +2,8 @@
 
 namespace Rtm;
 
+use Rtm\Exception;
+
 class Client implements ClientInterface
 {
     /**
@@ -19,6 +21,7 @@ class Client implements ClientInterface
     {
         $request = new Request($params);
         $request->setParameter('method', $method);
+        $request->setParameter('format', 'json');
 
         if (false === $request->hasParameter('api_key')) {
             $request->setParameter('api_key', $this->rtm->getApiKey());
@@ -28,22 +31,16 @@ class Client implements ClientInterface
             $request->setParameter('auth_token', $this->rtm->getAuthToken());
         }
 
-        if (false === $request->hasParameter('format')) {
-            if (null != $this->rtm->getResponseFormat()) {
-                $request->setParameter('format', $this->rtm->getResponseFormat());
-            }
-        }
-
         $request->sign($this->rtm->getSecret());
 
         $url = $request->getServiceUrl();
 
         $contents = file_get_contents($url);
 
-        $response = new Response($contents, $this->rtm->getResponseFormat());
+        $response = new Response($contents);
 
         if (false === $response->isValid()) {
-            throw new \Exception($response->getErrorMessage(), $response->getErrorCode());
+            throw new Exception($method . ': ' . $response->getErrorMessage(), $response->getErrorCode());
         }
 
         return $response->getResponse();

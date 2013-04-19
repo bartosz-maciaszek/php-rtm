@@ -46,13 +46,16 @@ class DataContainer implements \IteratorAggregate, \Countable
      */
     public function __call($method, array $arguments)
     {
-        $methodType    = substr($method, 0, 3);
-        $attributeName = strtolower(substr($method, 3, 1)) . substr($method, 4);
+        if (!preg_match('/^(set|get|has|remove)(\w+)$/', $method, $matches)) {
+            throw new \BadMethodCallException(sprintf('Method %s not implemented', $method));
+        }
+        
+        $methodType    = $matches[1];
+        $attributeName = lcfirst($matches[2]);
 
         switch ($methodType) {
             case 'set':
-                $this->set($attributeName, $arguments[0]);
-                return $this;
+                return $this->set($attributeName, $arguments[0]);
                 break;
 
             case 'get':
@@ -60,8 +63,13 @@ class DataContainer implements \IteratorAggregate, \Countable
                 return $this->get($attributeName, $default);
                 break;
 
-            default:
-                throw new \BadMethodCallException(sprintf('Method %s not implemented', $method));
+            case 'has':
+                return $this->has($attributeName);
+                break;
+
+            case 'remove':
+                return $this->remove($attributeName);
+                break;
         }
     }
 
@@ -99,6 +107,18 @@ class DataContainer implements \IteratorAggregate, \Countable
     public function has($name)
     {
         return isset($this->attributes[$name]);
+    }
+
+    /**
+     * Remove given attribute
+     * @param string $name
+     */
+    public function remove($name)
+    {
+        if ($this->has($name)) {
+            unset($this->attributes[$name]);
+        }
+        return $this;
     }
 
     /**

@@ -18,6 +18,7 @@ class Auth extends AbstractService
     public function getFrob()
     {
         $response = $this->rtm->call(Rtm::METHOD_AUTH_GET_FROB);
+
         $this->rtm->setFrob($response->getFrob());
         return $this->rtm->getFrob();
     }
@@ -30,5 +31,4 @@ class Auth extends AbstractService
 
         return $this->rtm->call(Rtm::METHOD_AUTH_GET_TOKEN, array('frob' => $frob))->getAuth();
     }
-
 }

@@ -5,39 +5,34 @@ namespace Rtm;
 class Response
 {
     private $response = null;
-    
-    private $type = null;
-    
-    const STAT_OK = 'ok';
-    
-    public function __construct($response, $type)
+
+    public function __construct($response = null)
     {
-        $response = $this->arrayToObject(json_decode($response, true));
-        
-        $this->response = $response;
-        $this->type = $type;
+        if (null !== $response) {
+            $this->setResponse($response);
+        }
     }
-    
-    public function arrayToObject($d)
+
+    public function setResponse($json)
     {
-        return is_array($d) ? new DataContainer(array_map(__METHOD__, $d)) : $d;
+        $this->response = Toolkit::arrayToDataContainer(json_decode($json, true));
     }
-    
+
     public function isValid()
     {
-        return $this->response->getRsp()->getStat() == self::STAT_OK;
+        return $this->response->getRsp()->getStat() == 'ok';
     }
-    
+
     public function getErrorMessage()
     {
         return $this->response->getRsp()->getErr()->getMsg();
     }
-    
+
     public function getErrorCode()
     {
         return $this->response->getRsp()->getErr()->getCode();
     }
-    
+
     public function getResponse()
     {
         return $this->response->getRsp();

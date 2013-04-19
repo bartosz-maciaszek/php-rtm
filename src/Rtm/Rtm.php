@@ -83,7 +83,7 @@ class Rtm implements RtmInterface
     const METHOD_TASKS_SET_URL        = 'rtm.tasks.setURL';
     const METHOD_TASKS_UNCOMPLETE     = 'rtm.tasks.uncomplete';
 
-    const METHOD_TEST_ECHO = 'rtm.test.echo';
+    const METHOD_TEST_ECHO  = 'rtm.test.echo';
     const METHOD_TEST_LOGIN = 'rtm.test.login';
 
     const METHOD_TIME_CONVERT = 'rtm.time.convert';
@@ -102,8 +102,6 @@ class Rtm implements RtmInterface
     private $apiKey = null;
 
     private $secret = null;
-
-    private $responseFormat = null;
 
     private $authToken = null;
 
@@ -129,7 +127,14 @@ class Rtm implements RtmInterface
     {
         if(!isset($this->services[$name]))
         {
-            $this->services[$name] = new $name($this);
+            try
+            {
+                $this->services[$name] = new $name($this);
+            }
+            catch(\Exception $e)
+            {
+                throw new Exception('Service ' . $name . ' not found', 0, $e);
+            }
         }
 
         return $this->services[$name];
@@ -225,24 +230,9 @@ class Rtm implements RtmInterface
         return $this->authToken;
     }
 
-    public function setResponseFormat($responseFormat)
-    {
-        if (!preg_match('/^(json|rest)$/', $responseFormat)) {
-            throw new \InvalidArgumentException('Response type should be \'rest\' or \'json\'.');
-        }
-
-        $this->responseFormat = $responseFormat;
-        return $this;
-    }
-
-    public function getResponseFormat()
-    {
-        return $this->responseFormat;
-    }
-
     public function call($method, array $params = array())
     {
-        return $this->client->call($method, $params);
+        return $this->getClient()->call($method, $params);
     }
 
     public function getAuthUrl($perms = self::AUTH_TYPE_READ)
@@ -254,7 +244,7 @@ class Rtm implements RtmInterface
 
         $request = new Request;
         $request->setParameter('api_key', $this->getApiKey());
-//         $request->setParameter('frob', $this->frob);
+        //$request->setParameter('frob', $this->getFrob());
         $request->setParameter('perms', $perms);
         $request->sign($this->getSecret());
 

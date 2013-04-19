@@ -32,10 +32,6 @@ interface RtmInterface
 
     public function getAuthToken();
 
-    public function setResponseFormat($responseFormat);
-
-    public function getResponseFormat();
-
     public function call($method, array $params = array());
 
     public function getAuthUrl($perms = 'read');

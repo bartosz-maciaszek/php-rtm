@@ -30,36 +30,6 @@ class RtmTest extends TestCase
         $this->assertTrue($rtm->getClient() instanceof ClientInterface);
     }
 
-    public function testSetResponseFormat()
-    {
-        $rtm = new Rtm;
-        $rtm->setResponseFormat('rest');
-        $this->assertEquals('rest', $rtm->getResponseFormat());
-
-        $rtm = new Rtm(array(
-            'responseFormat' => 'rest'
-        ));
-        $this->assertEquals('rest', $rtm->getResponseFormat());
-
-        $rtm = new Rtm;
-        $rtm->setResponseFormat('json');
-        $this->assertEquals('json', $rtm->getResponseFormat());
-
-        $rtm = new Rtm(array(
-            'responseFormat' => 'json'
-        ));
-        $this->assertEquals('json', $rtm->getResponseFormat());
-    }
-
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testSetIllegalResponseFormat()
-    {
-        $rtm = new Rtm;
-        $rtm->setResponseFormat('pdf');
-    }
-
     /**
      * @expectedException \Rtm\Exception
      */
@@ -183,6 +153,24 @@ class RtmTest extends TestCase
         $url = $rtm->getAuthUrl(Rtm::AUTH_TYPE_WRITE);
 
         $this->assertEquals(Rtm::URL_AUTH, substr($url, 0, strlen(Rtm::URL_AUTH)));
-        $this->assertTrue((bool) preg_match('/api_key=dfgdfgsdgsgsdfgdfg&perms=write&api_sig=\w{32}$/', parse_url($url, PHP_URL_QUERY)));
+        $this->assertRegExp('/api_key=dfgdfgsdgsgsdfgdfg&perms=write&api_sig=\w{32}$/', parse_url($url, PHP_URL_QUERY));
+    }
+
+    /**
+     * @expectedException Rtm\Exception
+     */
+    public function testCallWithoutMandatoryConfiguration()
+    {
+        $rtm = new Rtm;
+        $rtm->call(Rtm::METHOD_TEST_ECHO);
+    }
+
+    public function testGetExistingService()
+    {
+        $rtm = new Rtm;
+        $service = $rtm->getService(Rtm::SERVICE_TEST);
+
+        $this->assertInstanceOf('Rtm\Service\AbstractService', $service);
+        $this->assertInstanceOf('Rtm\Service\Test', $service);
     }
 }
