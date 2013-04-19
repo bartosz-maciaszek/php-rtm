@@ -127,14 +127,7 @@ class Rtm implements RtmInterface
     {
         if(!isset($this->services[$name]))
         {
-            try
-            {
-                $this->services[$name] = new $name($this);
-            }
-            catch(\Exception $e)
-            {
-                throw new Exception('Service ' . $name . ' not found', 0, $e);
-            }
+            $this->services[$name] = new $name($this);
         }
 
         return $this->services[$name];
