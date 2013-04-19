@@ -10,7 +10,7 @@
          stopOnFailure="false"
          syntaxCheck="false"
          bootstrap="tests/bootstrap.php">
-         
+
     <testsuites>
         <testsuite name="Library test suite">
             <directory>./tests/</directory>
