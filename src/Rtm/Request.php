@@ -127,6 +127,15 @@ class Request
     }
 
     /**
+     * Check whether request is signed
+     * @return boolean
+     */
+    public function isSigned()
+    {
+        return $this->hasParameter('api_sig');
+    }
+
+    /**
      * Get service URL to call (with appropriate parameters)
      * @return string
      */

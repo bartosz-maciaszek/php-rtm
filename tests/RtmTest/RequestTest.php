@@ -134,11 +134,11 @@ class RequestTest extends TestCase
             'param2' => 'bar'
         ));
 
-        $this->assertFalse($request->hasParameter('api_sig'));
+        $this->assertFalse($request->isSigned());
 
         $request->sign('sdfasf345345');
 
-        $this->assertTrue($request->hasParameter('api_sig'));
+        $this->assertTrue($request->isSigned());
         $this->assertEquals(32, strlen($request->getParameter('api_sig')));
     }
 

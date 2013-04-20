@@ -52,38 +52,79 @@ class Client implements ClientInterface
     }
 
     /**
+     * Get Rtm object
+     * @return Rtm
+     */
+    public function getRtm()
+    {
+        if (null === $this->rtm) {
+            throw new Exception('RTM object not set');
+        }
+
+        return $this->rtm;
+    }
+
+    /**
      * Makes a request to RTM API
      * @param  string $method
      * @param  array  $params
      * @return DataContainer
-     * @throws Rtm\Exception If response is not valid
      */
     public function call($method, array $params = array())
+    {
+        try
+        {
+            $url = $this->createRequest($method, $params)->getServiceUrl();
+
+            $json = file_get_contents($url);
+
+            return $this->createResponse($json)->getResponse();
+        }
+        catch (Exception $e)
+        {
+            throw new Exception($method . ': ' . $e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    /**
+     * Create request object
+     * @param  string $method
+     * @param  array  $params
+     * @return Request
+     */
+    public function createRequest($method, $params)
     {
         $request = new Request($params);
         $request->setParameter('method', $method);
         $request->setParameter('format', 'json');
 
         if (false === $request->hasParameter('api_key')) {
-            $request->setParameter('api_key', $this->rtm->getApiKey());
+            $request->setParameter('api_key', $this->getRtm()->getApiKey());
         }
 
         if (false === $request->hasParameter('auth_token')) {
-            $request->setParameter('auth_token', $this->rtm->getAuthToken());
+            $request->setParameter('auth_token', $this->getRtm()->getAuthToken());
         }
 
-        $request->sign($this->rtm->getSecret());
+        $request->sign($this->getRtm()->getSecret());
 
-        $url = $request->getServiceUrl();
+        return $request;
+    }
 
-        $contents = file_get_contents($url);
-
-        $response = new Response($contents);
+    /**
+     * Create response object
+     * @param  string $json
+     * @return Response
+     * @throws Rtm\Exception If response is not valid
+     */
+    public function createResponse($json)
+    {
+        $response = new Response($json);
 
         if (false === $response->isValid()) {
-            throw new Exception($method . ': ' . $response->getErrorMessage(), $response->getErrorCode());
+            throw new Exception($response->getErrorMessage(), $response->getErrorCode());
         }
 
-        return $response->getResponse();
+        return $response;
     }
 }
