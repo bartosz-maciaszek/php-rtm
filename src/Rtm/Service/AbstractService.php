@@ -33,6 +33,7 @@
 namespace Rtm\Service;
 
 use Rtm\Rtm;
+use Rtm\Exception;
 
 abstract class AbstractService
 {
@@ -42,8 +43,36 @@ abstract class AbstractService
      */
     protected $rtm;
 
-    public function __construct(Rtm $rtm)
+    /**
+     * Constructor. Set Rtm object optionally.
+     * @param Rtm $rtm
+     */
+    public function __construct(Rtm $rtm = null)
+    {
+    	if (null !== $rtm) {
+        	$this->setRtm($rtm);
+    	}
+    }
+
+    /**
+     * Set Rtm object
+     * @param Rtm $rtm
+     */
+    public function setRtm(Rtm $rtm)
     {
         $this->rtm = $rtm;
+    }
+
+    /**
+     * Get Rtm object
+     * @return Rtm
+     */
+    public function getRtm()
+    {
+        if (null === $this->rtm) {
+            throw new Exception('RTM object not set');
+        }
+
+        return $this->rtm;
     }
 }

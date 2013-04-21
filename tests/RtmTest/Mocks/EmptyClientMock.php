@@ -37,11 +37,31 @@ use Rtm\ClientInterface;
 
 class EmptyClientMock implements ClientInterface
 {
+    /**
+     * Set Rtm object
+     * @param Rtm $rtm
+     */
     public function setRtm(Rtm $rtm)
     {
 
     }
 
+    /**
+     * Get Rtm object
+     * @return Rtm
+     */
+    public function getRtm()
+    {
+
+    }
+
+    /**
+     * Makes a request to RTM API
+     * @param  string $method
+     * @param  array  $params
+     * @return DataContainer
+     * @throws Rtm\Exception If response is not valid
+     */
     public function call($method, array $params = array())
     {
 

@@ -41,6 +41,12 @@ interface ClientInterface
     public function setRtm(Rtm $rtm);
 
     /**
+     * Get Rtm object
+     * @return Rtm
+     */
+    public function getRtm();
+
+    /**
      * Makes a request to RTM API
      * @param  string $method
      * @param  array  $params
