@@ -38,11 +38,11 @@ use Rtm\ClientInterface;
 
 class ServiceTestClientMock implements ClientInterface
 {
-	/**
-	 * Rtm object
-	 * @var Rtm
-	 */
-	private $rtm;
+    /**
+     * Rtm object
+     * @var Rtm
+     */
+    private $rtm;
 
     /**
      * Set Rtm object
@@ -50,7 +50,7 @@ class ServiceTestClientMock implements ClientInterface
      */
     public function setRtm(Rtm $rtm)
     {
-    	$this->rtm = $rtm;
+        $this->rtm = $rtm;
     }
 
     /**
@@ -59,7 +59,7 @@ class ServiceTestClientMock implements ClientInterface
      */
     public function getRtm()
     {
-    	return $this->rtm;
+        return $this->rtm;
     }
 
     /**
@@ -73,10 +73,10 @@ class ServiceTestClientMock implements ClientInterface
     {
         $array = array_reverse(explode('.', $method));
 
-    	$response = new ServiceTestResponseMock;
-    	$response->__setService('Rtm\\Service\\' . ucfirst($array[1]));
-    	$response->__setMethod($method);
-    	$response->__setParams($params);
-    	return $response;
+        $response = new ServiceTestResponseMock;
+        $response->__setService('Rtm\\Service\\' . ucfirst($array[1]));
+        $response->__setMethod($method);
+        $response->__setParams($params);
+        return $response;
     }
 }

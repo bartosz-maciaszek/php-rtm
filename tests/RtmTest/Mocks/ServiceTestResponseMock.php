@@ -34,44 +34,44 @@ namespace RtmTest\Mocks;
 
 class ServiceTestResponseMock
 {
-	private $service = null;
+    private $service = null;
 
-	private $method = null;
+    private $method = null;
 
-	private $params = array();
+    private $params = array();
 
-	public function __setService($service)
-	{
-		$this->service = $service;
-	}
+    public function __setService($service)
+    {
+        $this->service = $service;
+    }
 
-	public function __getService()
-	{
-		return $this->service;
-	}
+    public function __getService()
+    {
+        return $this->service;
+    }
 
-	public function __setMethod($method)
-	{
-		$this->method = $method;
-	}
+    public function __setMethod($method)
+    {
+        $this->method = $method;
+    }
 
-	public function __getMethod()
-	{
-		return $this->method;
-	}
+    public function __getMethod()
+    {
+        return $this->method;
+    }
 
-	public function __setParams(array $params)
-	{
-		$this->params = $params;
-	}
+    public function __setParams(array $params)
+    {
+        $this->params = $params;
+    }
 
-	public function __getParams()
-	{
-		return $this->params;
-	}
+    public function __getParams()
+    {
+        return $this->params;
+    }
 
-	public function __call($method, array $parameters)
-	{
-		return $this;
-	}
+    public function __call($method, array $parameters)
+    {
+        return $this;
+    }
 }
