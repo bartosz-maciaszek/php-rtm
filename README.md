@@ -8,11 +8,13 @@ This library is created to simplify communication with Remember The Milk API. It
 
 ## Installation
 
-The easiest way to use php-rtm library is to add it as requirement do your composer.json file:
+The easiest way to start using php-rtm library is to add it as requirement to your composer.json file:
 
 ```
 "bartosz-maciaszek/php-rtm": "dev-master"
 ```
+
+And update your composer dependencies.
 
 Alternatively, you can clone this repo manually:
 
