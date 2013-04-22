@@ -1,6 +1,7 @@
 # Remember The Milk API client for PHP sample app
 
 ## Instructions:
+
  - Copy the contents of this directory to your document root.
  - Define `API_KEY` and `SECRET` constants in `bootstrap.php` (go [here](https://www.rememberthemilk.com/services/api/keys.rtm) if you don't have API key).
  - Configure your callback URL to point to `http://your-webserver/rtm.php`.
