@@ -37,31 +37,31 @@ use RtmTest\Mocks\ServiceTestClientMock;
 
 abstract class ServiceTestCase extends TestCase
 {
-	const API_KEY = 'asdfghrtuytjhgj';
-	const SECRET = 'dfkgjdgdfgdfgdf';
-	const AUTH_TOKEN = 'sgfg7thfghfdfgfsd';
+    const API_KEY = 'asdfghrtuytjhgj';
+    const SECRET = 'dfkgjdgdfgdfgdf';
+    const AUTH_TOKEN = 'sgfg7thfghfdfgfsd';
 
-	abstract public function getServiceMethodsMatrix();
+    abstract public function getServiceMethodsMatrix();
 
-	/**
-	 * @dataProvider getServiceMethodsMatrix
-	 */
-	public function testServiceMethod($serviceName, $methodName, array $parameters, array $expectedParameters)
-	{
-		$rtm = new Rtm;
-		$rtm->setApiKey(self::API_KEY);
-		$rtm->setSecret(self::SECRET);
-		$rtm->setAuthToken(self::AUTH_TOKEN);
-		$rtm->setClient(new ServiceTestClientMock);
+    /**
+     * @dataProvider getServiceMethodsMatrix
+     */
+    public function testServiceMethod($serviceName, $methodName, array $parameters, array $expectedParameters)
+    {
+        $rtm = new Rtm;
+        $rtm->setApiKey(self::API_KEY);
+        $rtm->setSecret(self::SECRET);
+        $rtm->setAuthToken(self::AUTH_TOKEN);
+        $rtm->setClient(new ServiceTestClientMock);
 
-		$service = $rtm->getService($serviceName);
+        $service = $rtm->getService($serviceName);
 
-		$reflection = new \ReflectionObject($service);
-		$method = $reflection->getMethod(preg_replace('/^[\w\.]+\.(\w+)$/', '\1', $methodName));
-		$response = $method->invokeArgs($service, $parameters);
+        $reflection = new \ReflectionObject($service);
+        $method = $reflection->getMethod(preg_replace('/^[\w\.]+\.(\w+)$/', '\1', $methodName));
+        $response = $method->invokeArgs($service, $parameters);
 
-		$this->assertEquals($serviceName, $response->__getService());
-		$this->assertEquals($methodName, $response->__getMethod());
-		$this->assertEquals($expectedParameters, $response->__getParams());
-	}
+        $this->assertEquals($serviceName, $response->__getService());
+        $this->assertEquals($methodName, $response->__getMethod());
+        $this->assertEquals($expectedParameters, $response->__getParams());
+    }
 }

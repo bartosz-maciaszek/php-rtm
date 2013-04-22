@@ -324,4 +324,3 @@ class TasksTest extends ServiceTestCase
         );
     }
 }
-
