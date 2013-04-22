@@ -40,6 +40,7 @@ abstract class ServiceTestCase extends TestCase
     const API_KEY = 'asdfghrtuytjhgj';
     const SECRET = 'dfkgjdgdfgdfgdf';
     const AUTH_TOKEN = 'sgfg7thfghfdfgfsd';
+    const FROB = 'hfgy5rty54dfgdfgh';
 
     abstract public function getServiceMethodsMatrix();
 
@@ -52,6 +53,7 @@ abstract class ServiceTestCase extends TestCase
         $rtm->setApiKey(self::API_KEY);
         $rtm->setSecret(self::SECRET);
         $rtm->setAuthToken(self::AUTH_TOKEN);
+        $rtm->setFrob(self::FROB);
         $rtm->setClient(new ServiceTestClientMock);
 
         $service = $rtm->getService($serviceName);

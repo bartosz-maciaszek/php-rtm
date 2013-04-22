@@ -34,6 +34,7 @@ namespace RtmTest\Service;
 
 use Rtm\Rtm;
 use Rtm\ServiceTestCase;
+use RtmTest\Mocks\ServiceTestClientMock;
 
 class TestTest extends ServiceTestCase
 {
@@ -48,5 +49,20 @@ class TestTest extends ServiceTestCase
                 array(),
                 array())
         );
+    }
+
+    public function testPing()
+    {
+        $rtm = new Rtm;
+        $rtm->setApiKey(self::API_KEY);
+        $rtm->setSecret(self::SECRET);
+        $rtm->setAuthToken(self::AUTH_TOKEN);
+        $rtm->setClient(new ServiceTestClientMock);
+
+        $response = $rtm->getService(Rtm::SERVICE_TEST)->ping();
+
+        $this->assertEquals(Rtm::SERVICE_TEST, $response->__getService());
+        $this->assertEquals(Rtm::METHOD_TEST_ECHO, $response->__getMethod());
+        $this->assertEquals(array(), $response->__getParams());
     }
 }

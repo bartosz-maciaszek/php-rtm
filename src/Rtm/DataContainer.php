@@ -83,23 +83,21 @@ class DataContainer implements \IteratorAggregate, \Countable
         $methodType    = $matches[1];
         $attributeName = lcfirst($matches[2]);
 
-        switch ($methodType) {
-            case 'set':
-                return $this->set($attributeName, $arguments[0]);
-                break;
+        if ('set' === $methodType) {
+            return $this->set($attributeName, $arguments[0]);
+        }
 
-            case 'get':
-                $default = isset($arguments[0]) ? $arguments[0] : null;
-                return $this->get($attributeName, $default);
-                break;
+        if ('get' === $methodType) {
+            $default = isset($arguments[0]) ? $arguments[0] : null;
+            return $this->get($attributeName, $default);
+        }
 
-            case 'has':
-                return $this->has($attributeName);
-                break;
+        if ('has' === $methodType) {
+            return $this->has($attributeName);
+        }
 
-            case 'remove':
-                return $this->remove($attributeName);
-                break;
+        if ('remove' === $methodType) {
+            return $this->remove($attributeName);
         }
     }
 

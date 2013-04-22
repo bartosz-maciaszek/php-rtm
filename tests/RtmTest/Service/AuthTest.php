@@ -64,6 +64,11 @@ class AuthTest extends ServiceTestCase
             array(
                 Rtm::SERVICE_AUTH,
                 Rtm::METHOD_AUTH_GET_TOKEN,
+                array(),
+                array('frob' => self::FROB)),
+            array(
+                Rtm::SERVICE_AUTH,
+                Rtm::METHOD_AUTH_GET_TOKEN,
                 array('frob' => '12312312312'),
                 array('frob' => '12312312312'))
         );
