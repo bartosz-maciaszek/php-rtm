@@ -40,7 +40,7 @@ $taskService = $rtm->getService(Rtm::SERVICE_TASKS);
 $taskList = $taskService->getList();
 ```
 
-Response from API is wrapped in handy class "Rtm\DataContainer" which gives you ability to make method chains like `$response->getUser()->getName()` as it supports recurrency. To review its code and unit tests see `src/Rtm/DataContainer.php` and `tests/RtmTest/DataContainerTest.php`. You can easily convert this object into an array or json string by invoking `toArray()` or `toJson()` method, respectively.
+Response from API is wrapped in handy class `Rtm\DataContainer` which gives you ability to make method chains like `$response->getUser()->getName()` as it supports recurrency. To review its code and unit tests see `src/Rtm/DataContainer.php` and `tests/RtmTest/DataContainerTest.php`. You can easily convert this object into an array or json string by invoking `toArray()` or `toJson()` method, respectively.
 
 ## Unit tests
 
