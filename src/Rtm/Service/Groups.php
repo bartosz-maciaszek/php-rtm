@@ -49,7 +49,7 @@ class Groups extends AbstractService
     public function addContact($groupId, $contactId, $timeline = 0)
     {
         $params = array(
-            'group_id'   => $group,
+            'group_id'   => $groupId,
             'contact_id' => $contactId,
             'timeline'   => $timeline
         );
@@ -75,7 +75,7 @@ class Groups extends AbstractService
     public function removeContact($groupId, $contactId, $timeline = 0)
     {
         $params = array(
-            'group_id'   => $group,
+            'group_id'   => $groupId,
             'contact_id' => $contactId,
             'timeline'   => $timeline
         );
