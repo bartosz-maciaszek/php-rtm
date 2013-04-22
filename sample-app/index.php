@@ -53,7 +53,7 @@ catch(Exception $e)
 $lists = $rtm->getService(Rtm::SERVICE_LISTS)->getList();
 
 if (isset($_GET['listId'])) {
-	$tasks = $rtm->getService(Rtm::SERVICE_TASKS)->getList(null, $_GET['listId'])->getTaskseries();
+    $tasks = $rtm->getService(Rtm::SERVICE_TASKS)->getList(null, $_GET['listId'])->getTaskseries();
 }
 
 $currentListId = isset($_GET['listId']) ? $_GET['listId'] : null;
