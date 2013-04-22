@@ -26,7 +26,7 @@ $taskList = $taskService->getList();
 
 Response from API is wrapped in handy class "Rtm\DataContainer" which gives you ability to make method chains like `$response->getUser()->getName()` as it supports recurrency. To review its code and unit tests see `src/Rtm/DataContainer.php` and `tests/RtmTest/DataContainerTest.php`. You can easily convert this object into an array or json string by invoking `toArray()` or `toJson()` method, respectively.
 
-Before you can call any API methods, you need to acquire auth token. To do that, user has to authorize your app. See `sample-app/rtm.php` file for details.
+Before you can call any API methods, you need to acquire auth token. To do that, user has to authorize your app. See `sample-app/rtm.php` file for details, it is explained step by step.
 
 ## Unit tests
 
