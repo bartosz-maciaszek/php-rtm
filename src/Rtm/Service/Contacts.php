@@ -36,6 +36,13 @@ use Rtm\Rtm;
 
 class Contacts extends AbstractService
 {
+    /**
+     * Adds a new contact. $contact should be a username or email address of a Remember The Milk user.
+     * @param string  $contact
+     * @param integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.contacts.add.rtm
+     */
     public function add($contact, $timeline = 0)
     {
         $params = array(
@@ -46,6 +53,13 @@ class Contacts extends AbstractService
         return $this->rtm->call(Rtm::METHOD_CONTACTS_ADD, $params);
     }
 
+    /**
+     * Deletes a contact.
+     * @param  integer $id
+     * @param  integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.contacts.delete.rtm
+     */
     public function delete($id, $timeline = 0)
     {
         $params = array(
@@ -56,6 +70,11 @@ class Contacts extends AbstractService
         return $this->rtm->call(Rtm::METHOD_CONTACTS_DELETE, $params);
     }
 
+    /**
+     * Retrieves a list of contacts.
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.contacts.getList.rtm
+     */
     public function getList()
     {
         return $this->rtm->call(Rtm::METHOD_CONTACTS_GET_LIST)->getContacts();

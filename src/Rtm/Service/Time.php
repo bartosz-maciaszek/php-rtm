@@ -36,6 +36,14 @@ use Rtm\Rtm;
 
 class Time extends AbstractService
 {
+    /**
+     * Returns the specified $time in the desired timezone.
+     * @param  string  $toTimezone
+     * @param  string  $fromTimezone
+     * @param  integer $time
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.time.convert.rtm
+     */
     public function convert($toTimezone, $fromTimezone = null, $time = null)
     {
         $params = array(
@@ -47,6 +55,14 @@ class Time extends AbstractService
         return $this->rtm->call(Rtm::METHOD_TIME_CONVERT, $params)->getTime();
     }
 
+    /**
+     * Returns the time, in UTC, for the parsed input.
+     * @param  integer $text
+     * @param  string  $timezone
+     * @param  string  $dateFormat
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.time.parse.rtm
+     */
     public function parse($text, $timezone = null, $dateFormat = null)
     {
         $params = array(

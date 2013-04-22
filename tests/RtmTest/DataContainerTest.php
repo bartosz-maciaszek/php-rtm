@@ -235,6 +235,18 @@ class DataContainerTest extends TestCase
         $this->assertArrayHasKey('param2', $array);
     }
 
+    public function testToJson()
+    {
+        $dc = new DataContainer(array(
+            'param1' => 'foo',
+            'param2' => 'bar'
+        ));
+
+        $json = $dc->toJson();
+
+        $this->assertJsonStringEqualsJsonString(json_encode(array('param1' => 'foo', 'param2' => 'bar')), $json);
+    }
+
     public function testToArrayReccurency()
     {
         $dc = new DataContainer(array(
@@ -268,6 +280,33 @@ class DataContainerTest extends TestCase
         $this->assertArrayHasKey('quux', $array['foo']['bar']['baz']);
 
         $this->assertEquals('test', $array['foo']['bar']['baz']['quux']);
+    }
+
+    public function testToJsonReccurency()
+    {
+        $dc = new DataContainer(array(
+            'foo' => new DataContainer(array(
+                'bar' => new DataContainer(array(
+                    'baz' => new DataContainer(array(
+                        'quux' => 'test'
+                    ))
+                ))
+            ))
+        ));
+
+        $expectedJson = json_encode(array(
+            'foo' => array(
+                'bar' => array(
+                    'baz' => array(
+                        'quux' => 'test'
+                    )
+                )
+            )
+        ));
+
+        $actualJson = $dc->toJson();
+
+        $this->assertJsonStringEqualsJsonString($expectedJson, $actualJson);
     }
 
     public function assertCounts(DataContainer $dc, $count)

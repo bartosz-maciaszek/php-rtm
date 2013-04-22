@@ -24,30 +24,38 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @package    Rtm.Service
  * @author     Bartosz Maciaszek <bartosz.maciaszek@gmail.com>
  * @copyright  2013 Bartosz Maciaszek.
  * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
  */
 
-namespace Rtm\Service;
+require_once 'bootstrap.php';
 
 use Rtm\Rtm;
 
-class Settings extends AbstractService
+$rtm = new Rtm;
+$rtm->setApiKey(API_KEY);
+$rtm->setSecret(SECRET);
+$rtm->setAuthToken(isset($_SESSION['RTM_AUTH_TOKEN']) ? $_SESSION['RTM_AUTH_TOKEN'] : null);
+
+try
 {
-	/**
-	 * Retrieves a list of user settings.
-	 *  - timezone - The user's Olson timezone. Blank if the user has not set a timezone.
-	 *  - dateformat - 0 indicates an European date format (e.g. 14/02/06), 1 indicates an American date format (e.g. 02/14/06).
-	 *  - timeformat - 0 indicates 12 hour time with day period (e.g. 5pm), 1 indicates 24 hour time (e.g. 17:00).
-	 *  - defaultlist - The user's default list. Blank if the user has not set a default list.
-	 *  - language - The user's language (ISO 639-1 code).
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.settings.getList.rtm
-	 */
-    public function getList()
-    {
-        return $this->rtm->call(Rtm::METHOD_SETTINGS_GET_LIST)->getSettings();
-    }
+    // Check authentication token
+    $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
 }
+catch(Exception $e)
+{
+    // No permissions, let's get them
+    header('Location: rtm.php');
+}
+
+
+$lists = $rtm->getService(Rtm::SERVICE_LISTS)->getList();
+
+if (isset($_GET['listId'])) {
+	$tasks = $rtm->getService(Rtm::SERVICE_TASKS)->getList(null, $_GET['listId'])->getTaskseries();
+}
+
+$currentListId = isset($_GET['listId']) ? $_GET['listId'] : null;
+
+include 'views/main.php';

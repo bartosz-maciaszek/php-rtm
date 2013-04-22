@@ -36,6 +36,17 @@ use Rtm\Rtm;
 
 class Notes extends AbstractService
 {
+    /**
+     * Adds a new note to a task.
+     * @param integer $listId
+     * @param integer $taskSeriesId
+     * @param integer $taskId
+     * @param string  $noteTitle
+     * @param string  $noteText
+     * @param integer $timeline
+     * @return DataConteiner
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.notes.add.rtm
+     */
     public function add($listId, $taskSeriesId, $taskId, $noteTitle, $noteText, $timeline = 0)
     {
         $params = array(
@@ -50,6 +61,13 @@ class Notes extends AbstractService
         return $this->rtm->call(Rtm::METHOD_NOTES_ADD, $params);
     }
 
+    /**
+     * Deletes a note.
+     * @param  integer $noteId
+     * @param  integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.notes.delete.rtm
+     */
     public function delete($noteId, $timeline = 0)
     {
         $params = array(
@@ -60,6 +78,15 @@ class Notes extends AbstractService
         return $this->rtm->call(Rtm::METHOD_NOTES_DELETE, $params);
     }
 
+    /**
+     * Modifies a note.
+     * @param  integer $noteId    [description]
+     * @param  string  $noteTitle [description]
+     * @param  string  $noteText  [description]
+     * @param  integer $timeline  [description]
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.notes.edit.rtm
+     */
     public function edit($noteId, $noteTitle, $noteText, $timeline = 0)
     {
         $params = array(

@@ -24,30 +24,58 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @package    Rtm.Service
  * @author     Bartosz Maciaszek <bartosz.maciaszek@gmail.com>
  * @copyright  2013 Bartosz Maciaszek.
  * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
  */
 
-namespace Rtm\Service;
+require_once 'bootstrap.php';
 
 use Rtm\Rtm;
 
-class Settings extends AbstractService
+$rtm = new Rtm;
+$rtm->setApiKey(API_KEY);
+$rtm->setSecret(SECRET);
+$rtm->setAuthToken(isset($_SESSION['RTM_AUTH_TOKEN']) ? $_SESSION['RTM_AUTH_TOKEN'] : null);
+
+try
 {
-	/**
-	 * Retrieves a list of user settings.
-	 *  - timezone - The user's Olson timezone. Blank if the user has not set a timezone.
-	 *  - dateformat - 0 indicates an European date format (e.g. 14/02/06), 1 indicates an American date format (e.g. 02/14/06).
-	 *  - timeformat - 0 indicates 12 hour time with day period (e.g. 5pm), 1 indicates 24 hour time (e.g. 17:00).
-	 *  - defaultlist - The user's default list. Blank if the user has not set a default list.
-	 *  - language - The user's language (ISO 639-1 code).
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.settings.getList.rtm
-	 */
-    public function getList()
-    {
-        return $this->rtm->call(Rtm::METHOD_SETTINGS_GET_LIST)->getSettings();
+    // Check authentication token
+    $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
+
+    // Successfully authenticated, redirect to app
+    header('Location: index.php');
+}
+catch(Exception $e)
+{
+    // Authentication request is taking place?
+    if (isset($_GET['frob'])) {
+        try
+        {
+            // Set the frob parameter
+            $rtm->setFrob($_GET['frob']);
+
+            // Call the getToken method, to acquire the token
+            $response = $rtm->getService(Rtm::SERVICE_AUTH)->getToken();
+
+            // Save token in Rtm object
+            $rtm->setAuthToken($response->getToken());
+
+            // Save token in session
+            $_SESSION['RTM_AUTH_TOKEN'] = $rtm->getAuthToken();
+
+            // Check authentication token
+            $rtm->getService(Rtm::SERVICE_AUTH)->checkToken();
+
+            // Authentication successful, redirect back to auth script to check again the token
+            header('Location: rtm.php');
+        }
+        catch(Exception $e)
+        {
+            echo 'Authentication failed...';
+        }
+    } else {
+        // No permissions, acquire it
+        header('Location: ' . $rtm->getAuthUrl(Rtm::AUTH_TYPE_READ));
     }
 }

@@ -353,7 +353,7 @@ class Rtm
     }
 
     /**
-     * Makes a request to the API
+     * Makes a request to the API (low-level request)
      * @param  string $method
      * @param  array  $params
      * @return mixed

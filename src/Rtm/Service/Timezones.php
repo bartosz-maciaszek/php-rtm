@@ -36,6 +36,11 @@ use Rtm\Rtm;
 
 class Timezones extends AbstractService
 {
+	/**
+	 * Retrieves a list of timezones.
+	 * @return DataContainer
+	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.timezones.getList.rtm
+	 */
     public function getList()
     {
         return $this->rtm->call(Rtm::METHOD_TIMEZONES_GET_LIST)->getTimezones()->getTimezone();

@@ -36,6 +36,12 @@ use Rtm\Rtm;
 
 class Auth extends AbstractService
 {
+    /**
+     * Returns the credentials attached to an authentication token.
+     * @param  string $authToken
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.auth.checkToken.rtm
+     */
     public function checkToken($authToken = null)
     {
         if (null === $authToken) {
@@ -45,6 +51,11 @@ class Auth extends AbstractService
         return $this->rtm->call(Rtm::METHOD_AUTH_CHECK_TOKEN, array('auth_token' => $authToken))->getAuth();
     }
 
+    /**
+     * Returns a frob to be used during authentication.
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.auth.getFrob.rtm
+     */
     public function getFrob()
     {
         $response = $this->rtm->call(Rtm::METHOD_AUTH_GET_FROB);
@@ -53,10 +64,16 @@ class Auth extends AbstractService
         return $this->rtm->getFrob();
     }
 
+    /**
+     * Returns the auth token for the given frob, if one has been attached.
+     * @param  string $frob
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.auth.getToken.rtm
+     */
     public function getToken($frob = null)
     {
         if (null === $frob) {
-            $frob = $this->getFrob();
+            $frob = $this->rtm->getFrob();
         }
 
         return $this->rtm->call(Rtm::METHOD_AUTH_GET_TOKEN, array('frob' => $frob))->getAuth();

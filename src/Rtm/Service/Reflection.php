@@ -36,6 +36,12 @@ use Rtm\Rtm;
 
 class Reflection extends AbstractService
 {
+    /**
+     * Returns information for a given Remember The Milk API method.
+     * @param  string $method
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.reflection.getMethodInfo.rtm
+     */
     public function getMethodInfo($method)
     {
         $params = array(
@@ -45,6 +51,11 @@ class Reflection extends AbstractService
         return $this->rtm->call(Rtm::METHOD_REFLECTION_GET_METHOD_INFO, $params)->getMethod();
     }
 
+    /**
+     * Returns a list of available Remember The Milk API methods.
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.reflection.getMethods.rtm
+     */
     public function getMethods()
     {
         return $this->rtm->call(Rtm::METHOD_REFLECTION_GET_METHODS)->getMethods()->getMethod();

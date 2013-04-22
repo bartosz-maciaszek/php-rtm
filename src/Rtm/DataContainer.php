@@ -165,4 +165,13 @@ class DataContainer implements \IteratorAggregate, \Countable
 
         return (array) $this->attributes;
     }
+
+    /**
+     * Convert object to JSON
+     * @return string
+     */
+    public function toJson()
+    {
+        return json_encode($this->toArray());
+    }
 }

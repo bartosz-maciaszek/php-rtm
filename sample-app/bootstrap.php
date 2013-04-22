@@ -24,30 +24,35 @@
  * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @package    Rtm.Service
  * @author     Bartosz Maciaszek <bartosz.maciaszek@gmail.com>
  * @copyright  2013 Bartosz Maciaszek.
  * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
  */
 
-namespace Rtm\Service;
+// Set include path
+set_include_path(get_include_path() . PATH_SEPARATOR . __DIR__ . '/../src/');
 
-use Rtm\Rtm;
+// Set autoloader
+spl_autoload_register(function($className) {
+    $className = ltrim($className, '\\');
 
-class Settings extends AbstractService
-{
-	/**
-	 * Retrieves a list of user settings.
-	 *  - timezone - The user's Olson timezone. Blank if the user has not set a timezone.
-	 *  - dateformat - 0 indicates an European date format (e.g. 14/02/06), 1 indicates an American date format (e.g. 02/14/06).
-	 *  - timeformat - 0 indicates 12 hour time with day period (e.g. 5pm), 1 indicates 24 hour time (e.g. 17:00).
-	 *  - defaultlist - The user's default list. Blank if the user has not set a default list.
-	 *  - language - The user's language (ISO 639-1 code).
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.settings.getList.rtm
-	 */
-    public function getList()
-    {
-        return $this->rtm->call(Rtm::METHOD_SETTINGS_GET_LIST)->getSettings();
+    $fileName  = '';
+    $namespace = '';
+
+    if ($lastNsPos = strripos($className, '\\')) {
+        $namespace = substr($className, 0, $lastNsPos);
+        $className = substr($className, $lastNsPos + 1);
+        $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
     }
-}
+
+    $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+
+    require_once $fileName;
+});
+
+// API key & secret
+define('API_KEY', '<your api key>');
+define('SECRET',  '<your secret>');
+
+// Start the session
+session_start();

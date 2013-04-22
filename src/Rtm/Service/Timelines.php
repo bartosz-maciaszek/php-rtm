@@ -36,6 +36,11 @@ use Rtm\Rtm;
 
 class Timelines extends AbstractService
 {
+	/**
+	 * Returns a new timeline.
+	 * @return DataContainer
+	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.timelines.create.rtm
+	 */
     public function create()
     {
         return $this->rtm->call(Rtm::METHOD_TIMELINES_CREATE)->getTimeline();

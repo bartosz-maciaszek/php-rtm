@@ -36,6 +36,13 @@ use Rtm\Rtm;
 
 class Groups extends AbstractService
 {
+    /**
+     * Creates a new group.
+     * @param string  $group
+     * @param integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.add.rtm
+     */
     public function add($group, $timeline = 0)
     {
         $params = array(
@@ -46,6 +53,14 @@ class Groups extends AbstractService
         return $this->rtm->call(Rtm::METHOD_GROUPS_ADD, $params);
     }
 
+    /**
+     * Adds a contact to a group.
+     * @param integer $groupId
+     * @param integer $contactId
+     * @param integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.addContact.rtm
+     */
     public function addContact($groupId, $contactId, $timeline = 0)
     {
         $params = array(
@@ -57,6 +72,13 @@ class Groups extends AbstractService
         return $this->rtm->call(Rtm::METHOD_GROUPS_ADD_CONTACT, $params);
     }
 
+    /**
+     * Deletes a group.
+     * @param  integer $groupId
+     * @param  integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.delete.rtm
+     */
     public function delete($groupId, $timeline = 0)
     {
         $params = array(
@@ -67,11 +89,24 @@ class Groups extends AbstractService
         return $this->rtm->call(Rtm::METHOD_GROUPS_DELETE, $params);
     }
 
+    /**
+     * Retrieves a list of groups.
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.getList.rtm
+     */
     public function getList()
     {
         return $this->rtm->call(Rtm::METHOD_GROUPS_GET_LIST)->getGroups();
     }
 
+    /**
+     * Removes a contact from a group.
+     * @param  integer $groupId
+     * @param  integer $contactId
+     * @param  integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.removeContact.rtm
+     */
     public function removeContact($groupId, $contactId, $timeline = 0)
     {
         $params = array(
