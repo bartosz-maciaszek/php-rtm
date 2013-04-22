@@ -8,7 +8,7 @@ This library is created to simplify communication with Remember The Milk API. It
 
 ## Installation
 
-The easiest way to start using php-rtm library is to add it as requirement to your composer.json file:
+The easiest way to start using php-rtm library is to add it as requirement to your `composer.json` file:
 
 ```
 "bartosz-maciaszek/php-rtm": "dev-master"
@@ -24,7 +24,7 @@ git clone git://github.com/bartosz-maciaszek/php-rtm.git
 
 ## Basic usage
 
-To call any method from API you simply need to create `Rtm` class instance and service object and then push some basic information like your API key and secret.
+To call any method from API you simply need to create `Rtm` class instance and service object and then push some basic information like your API key and secret. Additionally, you need to acquire Auth Token from Remember The Milk. To do that, user has to authorize your app. See `sample-app/rtm.php` file for details, it is explained step by step.
 
 ```php
 <?php
@@ -32,17 +32,15 @@ To call any method from API you simply need to create `Rtm` class instance and s
 use Rtm\Rtm;
 
 $rtm = new Rtm;
-$rtm->setApiKey('your api key');
-$rtm->setSecret('your secret');
-$rtm->setAuthToken('your auth token from RTM');
+$rtm->setApiKey('Your API key');
+$rtm->setSecret('Your secret');
+$rtm->setAuthToken('Your Auth Token from RTM');
 
 $taskService = $rtm->getService(Rtm::SERVICE_TASKS);
 $taskList = $taskService->getList();
 ```
 
 Response from API is wrapped in handy class "Rtm\DataContainer" which gives you ability to make method chains like `$response->getUser()->getName()` as it supports recurrency. To review its code and unit tests see `src/Rtm/DataContainer.php` and `tests/RtmTest/DataContainerTest.php`. You can easily convert this object into an array or json string by invoking `toArray()` or `toJson()` method, respectively.
-
-Before you can call any API methods, you also need to acquire auth token. To do that, user has to authorize your app. See `sample-app/rtm.php` file for details, it is explained step by step.
 
 ## Unit tests
 
