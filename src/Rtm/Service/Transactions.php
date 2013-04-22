@@ -36,13 +36,13 @@ use Rtm\Rtm;
 
 class Transactions extends AbstractService
 {
-	/**
-	 * Reverts the affects of an action.
-	 * @param  integer $transactionId
-	 * @param  integer $timeline
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.transactions.undo.rtm
-	 */
+    /**
+     * Reverts the affects of an action.
+     * @param  integer $transactionId
+     * @param  integer $timeline
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.transactions.undo.rtm
+     */
     public function undo($transactionId, $timeline = 0)
     {
         $params = array(

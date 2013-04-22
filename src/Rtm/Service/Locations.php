@@ -36,11 +36,11 @@ use Rtm\Rtm;
 
 class Locations extends AbstractService
 {
-	/**
-	 * Retrieves a list of locations.
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.locations.getList.rtm
-	 */
+    /**
+     * Retrieves a list of locations.
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.locations.getList.rtm
+     */
     public function getList()
     {
         return $this->rtm->call(Rtm::METHOD_LOCATIONS_GET_LIST)->getLocations()->getLocation();

@@ -1,5 +1,5 @@
 {
-	"name": "bartosz-maciaszek/php-rtm",
+    "name": "bartosz-maciaszek/php-rtm",
     "description": "Remember The Milk API client for PHP",
     "keywords": ["rtm", "remember the milk", "api", "client", "php"],
     "type": "library",

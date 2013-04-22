@@ -49,9 +49,9 @@ abstract class AbstractService
      */
     public function __construct(Rtm $rtm = null)
     {
-    	if (null !== $rtm) {
-        	$this->setRtm($rtm);
-    	}
+        if (null !== $rtm) {
+            $this->setRtm($rtm);
+        }
     }
 
     /**

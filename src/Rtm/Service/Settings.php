@@ -36,16 +36,16 @@ use Rtm\Rtm;
 
 class Settings extends AbstractService
 {
-	/**
-	 * Retrieves a list of user settings.
-	 *  - timezone - The user's Olson timezone. Blank if the user has not set a timezone.
-	 *  - dateformat - 0 indicates an European date format (e.g. 14/02/06), 1 indicates an American date format (e.g. 02/14/06).
-	 *  - timeformat - 0 indicates 12 hour time with day period (e.g. 5pm), 1 indicates 24 hour time (e.g. 17:00).
-	 *  - defaultlist - The user's default list. Blank if the user has not set a default list.
-	 *  - language - The user's language (ISO 639-1 code).
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.settings.getList.rtm
-	 */
+    /**
+     * Retrieves a list of user settings.
+     *  - timezone - The user's Olson timezone. Blank if the user has not set a timezone.
+     *  - dateformat - 0 indicates an European date format (e.g. 14/02/06), 1 indicates an American date format (e.g. 02/14/06).
+     *  - timeformat - 0 indicates 12 hour time with day period (e.g. 5pm), 1 indicates 24 hour time (e.g. 17:00).
+     *  - defaultlist - The user's default list. Blank if the user has not set a default list.
+     *  - language - The user's language (ISO 639-1 code).
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.settings.getList.rtm
+     */
     public function getList()
     {
         return $this->rtm->call(Rtm::METHOD_SETTINGS_GET_LIST)->getSettings();

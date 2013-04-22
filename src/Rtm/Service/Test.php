@@ -36,11 +36,11 @@ use Rtm\Rtm;
 
 class Test extends AbstractService
 {
-	/**
-	 * A testing method which echos all parameters back in the response.
-	 * @return DataContainer
-	 * @link https://www.rememberthemilk.com/services/api/methods/rtm.test.echo.rtm
-	 */
+    /**
+     * A testing method which echos all parameters back in the response.
+     * @return DataContainer
+     * @link https://www.rememberthemilk.com/services/api/methods/rtm.test.echo.rtm
+     */
     public function ping()
     {
         return $this->rtm->call(Rtm::METHOD_TEST_ECHO);
