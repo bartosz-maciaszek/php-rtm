@@ -144,13 +144,10 @@ class RtmTest extends TestCase
         $this->assertEquals('e245k63469bdfg8dfg034rwfsdf', $rtm->getSecret());
     }
 
-    /**
-     * @expectedException \Rtm\Exception
-     */
     public function testNotSetAuthKey()
     {
         $rtm = new Rtm;
-        $rtm->getAuthToken();
+        $this->assertNull($rtm->getAuthToken());
     }
 
     public function testSetAuthToken()

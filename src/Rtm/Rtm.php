@@ -339,16 +339,11 @@ class Rtm
     }
 
     /**
-     * Get auth token
-     * @return string
-     * @throws Rtm\Exception If auth token is not set
+     * Get auth token (if set)
+     * @return string|null
      */
     public function getAuthToken()
     {
-        if (false === isset($this->authToken)) {
-            throw new Exception('Auth token not set');
-        }
-
         return $this->authToken;
     }
 
