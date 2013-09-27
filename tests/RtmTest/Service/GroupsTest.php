@@ -46,7 +46,8 @@ class GroupsTest extends ServiceTestCase
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_ADD,
                 array('group' => 'Test group'),
-                array('group' => 'Test group', 'timeline' => 0)),
+                array('group' => 'Test group', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_ADD,
@@ -58,7 +59,8 @@ class GroupsTest extends ServiceTestCase
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_ADD_CONTACT,
                 array('group_id' => 123, 'contact_id' => 123),
-                array('group_id' => 123, 'contact_id' => 123, 'timeline' => 0)),
+                array('group_id' => 123, 'contact_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_ADD_CONTACT,
@@ -70,7 +72,8 @@ class GroupsTest extends ServiceTestCase
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_DELETE,
                 array('group_id' => 123),
-                array('group_id' => 123, 'timeline' => 0)),
+                array('group_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_DELETE,
@@ -89,7 +92,8 @@ class GroupsTest extends ServiceTestCase
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_REMOVE_CONTACT,
                 array('group_id' => 123, 'contact_id' => 123),
-                array('group_id' => 123, 'contact_id' => 123, 'timeline' => 0)),
+                array('group_id' => 123, 'contact_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_GROUPS,
                 Rtm::METHOD_GROUPS_REMOVE_CONTACT,

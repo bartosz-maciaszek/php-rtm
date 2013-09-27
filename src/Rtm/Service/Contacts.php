@@ -43,11 +43,11 @@ class Contacts extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.contacts.add.rtm
      */
-    public function add($contact, $timeline = 0)
+    public function add($contact, $timeline = null)
     {
         $params = array(
             'contact'  => $contact,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_CONTACTS_ADD, $params);
@@ -60,11 +60,11 @@ class Contacts extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.contacts.delete.rtm
      */
-    public function delete($id, $timeline = 0)
+    public function delete($id, $timeline = null)
     {
         $params = array(
             'contact_id' => $id,
-            'timeline'   => $timeline
+            'timeline'   => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_CONTACTS_DELETE, $params);

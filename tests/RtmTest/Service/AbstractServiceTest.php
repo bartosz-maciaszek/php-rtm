@@ -34,6 +34,7 @@ namespace RtmTest\Service;
 
 use Rtm\Rtm;
 use Rtm\TestCase;
+use Rtm\Exception;
 use RtmTest\Mocks\EmptyServiceMock;
 
 class AbstractServiceTest extends TestCase
@@ -60,5 +61,23 @@ class AbstractServiceTest extends TestCase
         $service = new EmptyServiceMock(new Rtm);
 
         $this->assertInstanceOf('Rtm\Rtm', $service->getRtm());
+    }
+
+    /**
+     * @expectedException Rtm\Exception
+     */
+    public function testEmptyTimelineThrowsExpception()
+    {
+        $service = new EmptyServiceMock(new Rtm);
+        $service->getTimeline();
+    }
+
+    public function testSetTimeline()
+    {
+        $service = new EmptyServiceMock(new Rtm);
+        $s = $service->setTimeline(1234567);
+
+        $this->assertInstanceOf('RtmTest\Mocks\EmptyServiceMock', $s);
+        $this->assertEquals(1234567, $service->getTimeline());
     }
 }

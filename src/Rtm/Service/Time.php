@@ -47,9 +47,9 @@ class Time extends AbstractService
     public function convert($toTimezone, $fromTimezone = null, $time = null)
     {
         $params = array(
-            'to_timezone' => $toTimezone,
+            'to_timezone'   => $toTimezone,
             'from_timezone' => $fromTimezone,
-            'time' => $time
+            'time'          => $time
         );
 
         return $this->rtm->call(Rtm::METHOD_TIME_CONVERT, $params)->getTime();

@@ -43,11 +43,11 @@ class Transactions extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.transactions.undo.rtm
      */
-    public function undo($transactionId, $timeline = 0)
+    public function undo($transactionId, $timeline = null)
     {
         $params = array(
             'transaction_id' => $transactionId,
-            'timeline'       => $timeline
+            'timeline'       => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TRANSACTIONS_UNDO, $params);

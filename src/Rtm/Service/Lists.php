@@ -44,12 +44,12 @@ class Lists extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.lists.add.rtm
      */
-    public function add($name, $filter = null, $timeline = 0)
+    public function add($name, $filter = null, $timeline = null)
     {
         $params = array(
             'name'     => $name,
             'filter'   => $filter,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_LISTS_ADD, $params);
@@ -62,11 +62,11 @@ class Lists extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.lists.archive.rtm
      */
-    public function archive($listId, $timeline = 0)
+    public function archive($listId, $timeline = null)
     {
         $params = array(
             'list_id'  => $listId,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_LISTS_ARCHIVE, $params);
@@ -79,11 +79,11 @@ class Lists extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.lists.delete.rtm
      */
-    public function delete($listId, $timeline = 0)
+    public function delete($listId, $timeline = null)
     {
         $params = array(
             'list_id'  => $listId,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_LISTS_DELETE, $params);
@@ -106,11 +106,11 @@ class Lists extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.lists.setDefaultList.rtm
      */
-    public function setDefaultList($listId, $timeline = 0)
+    public function setDefaultList($listId, $timeline = null)
     {
         $params = array(
             'list_id'  => $listId,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_LISTS_SET_DEFAULT, $params);
@@ -124,12 +124,12 @@ class Lists extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.lists.setName.rtm
      */
-    public function setName($listId, $name, $timeline = 0)
+    public function setName($listId, $name, $timeline = null)
     {
         $params = array(
             'list_id'  => $listId,
             'name'     => $name,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_LISTS_SET_NAME, $params);
@@ -142,11 +142,11 @@ class Lists extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.lists.unarchive.rtm
      */
-    public function unarchive($listId, $timeline = 0)
+    public function unarchive($listId, $timeline = null)
     {
         $params = array(
             'list_id'  => $listId,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_LISTS_UNARCHIVE, $params);

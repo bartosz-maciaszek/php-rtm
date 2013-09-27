@@ -47,7 +47,7 @@ abstract class ServiceTestCase extends TestCase
     /**
      * @dataProvider getServiceMethodsMatrix
      */
-    public function testServiceMethod($serviceName, $methodName, array $parameters, array $expectedParameters)
+    public function testServiceMethod($serviceName, $methodName, array $parameters, array $expectedParameters, $timeline = null)
     {
         $rtm = new Rtm;
         $rtm->setApiKey(self::API_KEY);
@@ -57,6 +57,10 @@ abstract class ServiceTestCase extends TestCase
         $rtm->setClient(new ServiceTestClientMock);
 
         $service = $rtm->getService($serviceName);
+
+        if (null !== $timeline) {
+            $service->setTimeline($timeline);
+        }
 
         $reflection = new \ReflectionObject($service);
         $method = $reflection->getMethod(preg_replace('/^[\w\.]+\.(\w+)$/', '\1', $methodName));

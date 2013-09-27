@@ -46,7 +46,8 @@ class TransactionsTest extends ServiceTestCase
                 Rtm::SERVICE_TRANSACTIONS,
                 Rtm::METHOD_TRANSACTIONS_UNDO,
                 array('transaction_id' => 123),
-                array('transaction_id' => 123, 'timeline' => 0)),
+                array('transaction_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TRANSACTIONS,
                 Rtm::METHOD_TRANSACTIONS_UNDO,

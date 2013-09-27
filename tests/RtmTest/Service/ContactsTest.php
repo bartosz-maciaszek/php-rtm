@@ -51,7 +51,8 @@ class ContactsTest extends ServiceTestCase
                 Rtm::SERVICE_CONTACTS,
                 Rtm::METHOD_CONTACTS_ADD,
                 array('contact' => 'foo'),
-                array('contact' => 'foo', 'timeline' => 0)),
+                array('contact' => 'foo', 'timeline' => 1234567),
+                1234567),
 
             /** contacts.delete */
             array(
@@ -63,7 +64,8 @@ class ContactsTest extends ServiceTestCase
                 Rtm::SERVICE_CONTACTS,
                 Rtm::METHOD_CONTACTS_DELETE,
                 array('contact_id' => 123),
-                array('contact_id' => 123, 'timeline' => 0)),
+                array('contact_id' => 123, 'timeline' => 1234567),
+                1234567),
 
             /** contacts.getList */
             array(

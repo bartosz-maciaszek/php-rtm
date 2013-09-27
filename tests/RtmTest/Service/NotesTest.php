@@ -46,7 +46,8 @@ class NotesTest extends ServiceTestCase
                 Rtm::SERVICE_NOTES,
                 Rtm::METHOD_NOTES_ADD,
                 array('list_id' => 123, 'taskseries_id' => 123, 'task_id' => 123, 'note_title' => 'Test', 'note_text' => 'Test'),
-                array('list_id' => 123, 'taskseries_id' => 123, 'task_id' => 123, 'note_title' => 'Test', 'note_text' => 'Test', 'timeline' => 0)),
+                array('list_id' => 123, 'taskseries_id' => 123, 'task_id' => 123, 'note_title' => 'Test', 'note_text' => 'Test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_NOTES,
                 Rtm::METHOD_NOTES_ADD,
@@ -58,7 +59,8 @@ class NotesTest extends ServiceTestCase
                 Rtm::SERVICE_NOTES,
                 Rtm::METHOD_NOTES_DELETE,
                 array('note_id' => 123),
-                array('note_id' => 123, 'timeline' => 0)),
+                array('note_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_NOTES,
                 Rtm::METHOD_NOTES_DELETE,
@@ -70,7 +72,8 @@ class NotesTest extends ServiceTestCase
                 Rtm::SERVICE_NOTES,
                 Rtm::METHOD_NOTES_EDIT,
                 array('note_id' => 123, 'note_title' => 'Test', 'note_text' => 'Test'),
-                array('note_id' => 123, 'note_title' => 'Test', 'note_text' => 'Test', 'timeline' => 0)),
+                array('note_id' => 123, 'note_title' => 'Test', 'note_text' => 'Test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_NOTES,
                 Rtm::METHOD_NOTES_EDIT,

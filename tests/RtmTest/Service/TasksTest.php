@@ -46,59 +46,65 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_ADD,
                 array('name' => 'test'),
-                array('name' => 'test', 'list_id' => null, 'parse' => 0, 'timeline' => 0)),
+                array('name' => 'test', 'list_id' => null, 'parse' => 0, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_ADD,
                 array('name' => 'test', 'list_id' => 123),
-                array('name' => 'test', 'list_id' => 123, 'parse' => 0, 'timeline' => 0)),
+                array('name' => 'test', 'list_id' => 123, 'parse' => 0, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_ADD,
                 array('name' => 'test', 'list_id' => 123, 'parse' => 1),
-                array('name' => 'test', 'list_id' => 123, 'parse' => 1, 'timeline' => 0)),
+                array('name' => 'test', 'list_id' => 123, 'parse' => 1, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_ADD,
                 array('name' => 'test', 'list_id' => 123, 'parse' => 1, 'timeline' => 123),
                 array('name' => 'test', 'list_id' => 123, 'parse' => 1, 'timeline' => 123)),
-            
+
             /** tasks.addTags */
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_ADD_TAGS,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_ADD_TAGS,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 123),
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 123)),
-            
+
             /** tasks.complete */
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_COMPLETE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_COMPLETE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123),
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123)),
-            
+
             /** tasks.delete */
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_DELETE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_DELETE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123),
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123)),
-            
+
             /** tasks.getList */
             array(
                 Rtm::SERVICE_TASKS,
@@ -120,37 +126,40 @@ class TasksTest extends ServiceTestCase
                 Rtm::METHOD_TASKS_GET_LIST,
                 array('filter' => 'test', 'list_id' => 123, 'last_sync' => 123456),
                 array('filter' => 'test', 'list_id' => 123, 'last_sync' => 123456)),
-            
+
             /** tasks.movePriority */
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_MOVE_PRIORITY,
                 array('direction' => 'test', 'task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('direction' => 'test', 'task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 0)),
+                array('direction' => 'test', 'task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_MOVE_PRIORITY,
                 array('direction' => 'test', 'task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123),
                 array('direction' => 'test', 'task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123)),
-            
+
             /** tasks.moveTo */
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_MOVE_TO,
                 array('task_id' => 123, 'from_list_id' => 123, 'to_list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'from_list_id' => 123, 'to_list_id' => 123, 'taskseries_id' => 123, 'timeline' => 0)),
+                array('task_id' => 123, 'from_list_id' => 123, 'to_list_id' => 123, 'taskseries_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_MOVE_TO,
                 array('task_id' => 123, 'from_list_id' => 123, 'to_list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123),
                 array('task_id' => 123, 'from_list_id' => 123, 'to_list_id' => 123, 'taskseries_id' => 123, 'timeline' => 123)),
-            
+
             /** tasks.postpone */
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_POSTPONE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_POSTPONE,
@@ -162,7 +171,8 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_REMOVE_TAGS,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_REMOVE_TAGS,
@@ -174,22 +184,26 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_DUE_DATE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => null, 'has_due_time' => 0, 'parse' => 0, 'timeline' => null)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => null, 'has_due_time' => null, 'parse' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_DUE_DATE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 0, 'parse' => 0, 'timeline' => null)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => null, 'parse' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_DUE_DATE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 1),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 1, 'parse' => 0, 'timeline' => null)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 1, 'parse' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_DUE_DATE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 1, 'parse' => 1),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 1, 'parse' => 1, 'timeline' => null)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'due' => 'test', 'has_due_time' => 1, 'parse' => 1, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_DUE_DATE,
@@ -201,12 +215,14 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_ESTIMATE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'estimate' => null, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'estimate' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_ESTIMATE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'estimate' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'estimate' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'estimate' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_ESTIMATE,
@@ -218,12 +234,14 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_LOCATION,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'location_id' => null, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'location_id' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_LOCATION,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'location_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'location_id' => 123, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'location_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_LOCATION,
@@ -235,7 +253,8 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_NAME,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'name' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'name' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'name' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_NAME,
@@ -247,12 +266,14 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_PRIORITY,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'priority' => null, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'priority' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_PRIORITY,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'priority' => 1),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'priority' => 1, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'priority' => 1, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_PRIORITY,
@@ -264,12 +285,14 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_RECURRENCE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'repeat' => null, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'repeat' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_RECURRENCE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'repeat' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'repeat' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'repeat' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_RECURRENCE,
@@ -281,12 +304,14 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_TAGS,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => null, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_TAGS,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'tags' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_TAGS,
@@ -298,12 +323,14 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_URL,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'url' => null, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'url' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_URL,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'url' => 'test'),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'url' => 'test', 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'url' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_SET_URL,
@@ -315,7 +342,8 @@ class TasksTest extends ServiceTestCase
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_UNCOMPLETE,
                 array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123),
-                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 0)),
+                array('task_id' => 123, 'list_id' => 123, 'taskseries_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_TASKS,
                 Rtm::METHOD_TASKS_UNCOMPLETE,

@@ -47,7 +47,7 @@ class Notes extends AbstractService
      * @return DataConteiner
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.notes.add.rtm
      */
-    public function add($listId, $taskSeriesId, $taskId, $noteTitle, $noteText, $timeline = 0)
+    public function add($listId, $taskSeriesId, $taskId, $noteTitle, $noteText, $timeline = null)
     {
         $params = array(
             'list_id'       => $listId,
@@ -55,7 +55,7 @@ class Notes extends AbstractService
             'task_id'       => $taskId,
             'note_title'    => $noteTitle,
             'note_text'     => $noteText,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_NOTES_ADD, $params);
@@ -68,11 +68,11 @@ class Notes extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.notes.delete.rtm
      */
-    public function delete($noteId, $timeline = 0)
+    public function delete($noteId, $timeline = null)
     {
         $params = array(
             'note_id'  => $noteId,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_NOTES_DELETE, $params);
@@ -87,13 +87,13 @@ class Notes extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.notes.edit.rtm
      */
-    public function edit($noteId, $noteTitle, $noteText, $timeline = 0)
+    public function edit($noteId, $noteTitle, $noteText, $timeline = null)
     {
         $params = array(
             'note_id'    => $noteId,
             'note_title' => $noteTitle,
             'note_text'  => $noteText,
-            'timeline'   => $timeline
+            'timeline'   => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_NOTES_EDIT, $params);

@@ -46,12 +46,14 @@ class ListsTest extends ServiceTestCase
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_ADD,
                 array('name' => 'Test'),
-                array('name' => 'Test', 'filter' => null, 'timeline' => 0)),
+                array('name' => 'Test', 'filter' => null, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_ADD,
                 array('name' => 'Test', 'filter' => 'test'),
-                array('name' => 'Test', 'filter' => 'test', 'timeline' => 0)),
+                array('name' => 'Test', 'filter' => 'test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_ADD,
@@ -63,7 +65,8 @@ class ListsTest extends ServiceTestCase
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_ARCHIVE,
                 array('list_id' => 123),
-                array('list_id' => 123, 'timeline' => 0)),
+                array('list_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_ARCHIVE,
@@ -75,7 +78,8 @@ class ListsTest extends ServiceTestCase
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_DELETE,
                 array('list_id' => 123),
-                array('list_id' => 123, 'timeline' => 0)),
+                array('list_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_DELETE,
@@ -92,7 +96,8 @@ class ListsTest extends ServiceTestCase
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_SET_DEFAULT,
                 array('list_id' => 123),
-                array('list_id' => 123, 'timeline' => 0)),
+                array('list_id' => 123, 'timeline' => 1234567),
+                1234567),
 
             /** lists.setDefault */
             array(
@@ -106,7 +111,8 @@ class ListsTest extends ServiceTestCase
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_SET_NAME,
                 array('list_id' => 123, 'name' => 'Test'),
-                array('list_id' => 123, 'name' => 'Test', 'timeline' => 0)),
+                array('list_id' => 123, 'name' => 'Test', 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_SET_NAME,
@@ -118,7 +124,8 @@ class ListsTest extends ServiceTestCase
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_UNARCHIVE,
                 array('list_id' => 123),
-                array('list_id' => 123, 'timeline' => 0)),
+                array('list_id' => 123, 'timeline' => 1234567),
+                1234567),
             array(
                 Rtm::SERVICE_LISTS,
                 Rtm::METHOD_LISTS_UNARCHIVE,

@@ -44,6 +44,12 @@ abstract class AbstractService
     protected $rtm;
 
     /**
+     * Default timeline
+     * @var int
+     */
+    protected $timeline;
+
+    /**
      * Constructor. Set Rtm object optionally.
      * @param Rtm $rtm
      */
@@ -74,5 +80,25 @@ abstract class AbstractService
         }
 
         return $this->rtm;
+    }
+
+    /**
+     * Sets default timeline for a service instance
+     * @param int $timeline
+     */
+    public function setTimeline($timeline)
+    {
+        $this->timeline = $timeline;
+
+        return $this;
+    }
+
+    public function getTimeline()
+    {
+        if ($this->timeline === null) {
+            throw new Exception('Timeline not set.');
+        }
+
+        return $this->timeline;
     }
 }

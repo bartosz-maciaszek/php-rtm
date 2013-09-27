@@ -47,13 +47,13 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.add.rtm
      */
-    public function add($name, $listId = null, $parse = 0, $timeline = 0)
+    public function add($name, $listId = null, $parse = null, $timeline = null)
     {
         $params = array(
             'name'     => $name,
             'list_id'  => $listId,
             'parse'    => $parse,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_ADD, $params);
@@ -69,14 +69,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.addTags.rtm
      */
-    public function addTags($taskId, $listId, $taskSeriesId, $tags, $timeline = 0)
+    public function addTags($taskId, $listId, $taskSeriesId, $tags, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'tags'          => $tags,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_ADD_TAGS, $params);
@@ -91,13 +91,13 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.complete.rtm
      */
-    public function complete($taskId, $listId, $taskSeriesId, $timeline = 0)
+    public function complete($taskId, $listId, $taskSeriesId, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_COMPLETE, $params);
@@ -112,13 +112,13 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.delete.rtm
      */
-    public function delete($taskId, $listId, $taskSeriesId, $timeline = 0)
+    public function delete($taskId, $listId, $taskSeriesId, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_DELETE, $params);
@@ -155,14 +155,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.movePriority.rtm
      */
-    public function movePriority($direction, $taskId, $listId, $taskSeriesId, $timeline = 0)
+    public function movePriority($direction, $taskId, $listId, $taskSeriesId, $timeline = null)
     {
         $params = array(
             'direction'     => $direction,
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_MOVE_PRIORITY, $params);
@@ -178,14 +178,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.moveTo.rtm
      */
-    public function moveTo($taskId, $fromListId, $toListId, $taskSeriesId, $timeline = 0)
+    public function moveTo($taskId, $fromListId, $toListId, $taskSeriesId, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'from_list_id'  => $fromListId,
             'to_list_id'    => $toListId,
             'taskseries_id' => $taskSeriesId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_MOVE_TO, $params);
@@ -201,13 +201,13 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.postpone.rtm
      */
-    public function postpone($taskId, $listId, $taskSeriesId, $timeline = 0)
+    public function postpone($taskId, $listId, $taskSeriesId, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_POSTPONE, $params);
@@ -223,14 +223,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.removeTags.rtm
      */
-    public function removeTags($taskId, $listId, $taskSeriesId, $tags, $timeline = 0)
+    public function removeTags($taskId, $listId, $taskSeriesId, $tags, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'tags'          => $tags,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_REMOVE_TAGS, $params);
@@ -250,7 +250,7 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setDueDate.rtm
      */
-    public function setDueDate($taskId, $listId, $taskSeriesId, $due = null, $hasDueTime = null, $parse = 0, $timeline = 0)
+    public function setDueDate($taskId, $listId, $taskSeriesId, $due = null, $hasDueTime = null, $parse = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
@@ -259,7 +259,7 @@ class Tasks extends AbstractService
             'due'           => $due,
             'has_due_time'  => $hasDueTime,
             'parse'         => $parse,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_DUE_DATE, $params);
@@ -275,14 +275,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setEstimate.rtm
      */
-    public function setEstimate($taskId, $listId, $taskSeriesId, $estimate = null, $timeline = 0)
+    public function setEstimate($taskId, $listId, $taskSeriesId, $estimate = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'estimate'      => $estimate,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_ESTIMATE, $params);
@@ -298,14 +298,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setLocation.rtm
      */
-    public function setLocation($taskId, $listId, $taskSeriesId, $locationId = null, $timeline = 0)
+    public function setLocation($taskId, $listId, $taskSeriesId, $locationId = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'location_id'   => $locationId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_LOCATION, $params);
@@ -321,14 +321,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setName.rtm
      */
-    public function setName($taskId, $listId, $taskSeriesId, $name, $timeline = 0)
+    public function setName($taskId, $listId, $taskSeriesId, $name, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'name'          => $name,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_NAME, $params);
@@ -345,14 +345,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setPriority.rtm
      */
-    public function setPriority($taskId, $listId, $taskSeriesId, $priority = null, $timeline = 0)
+    public function setPriority($taskId, $listId, $taskSeriesId, $priority = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'priority'      => $priority,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_PRIORITY, $params);
@@ -369,14 +369,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setRecurrence.rtm
      */
-    public function setRecurrence($taskId, $listId, $taskSeriesId, $repeat = null, $timeline = 0)
+    public function setRecurrence($taskId, $listId, $taskSeriesId, $repeat = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'repeat'        => $repeat,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_RECURRENCE, $params);
@@ -393,14 +393,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setTags.rtm
      */
-    public function setTags($taskId, $listId, $taskSeriesId, $tags = null, $timeline = 0)
+    public function setTags($taskId, $listId, $taskSeriesId, $tags = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'tags'          => $tags,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_TAGS, $params);
@@ -416,14 +416,14 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.setURL.rtm
      */
-    public function setUrl($taskId, $listId, $taskSeriesId, $url = null, $timeline = 0)
+    public function setUrl($taskId, $listId, $taskSeriesId, $url = null, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
             'url'           => $url,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_SET_URL, $params);
@@ -438,13 +438,13 @@ class Tasks extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.tasks.uncomplete.rtm
      */
-    public function uncomplete($taskId, $listId, $taskSeriesId, $timeline = 0)
+    public function uncomplete($taskId, $listId, $taskSeriesId, $timeline = null)
     {
         $params = array(
             'task_id'       => $taskId,
             'list_id'       => $listId,
             'taskseries_id' => $taskSeriesId,
-            'timeline'      => $timeline
+            'timeline'      => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_TASKS_UNCOMPLETE, $params);

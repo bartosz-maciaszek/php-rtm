@@ -43,11 +43,11 @@ class Groups extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.add.rtm
      */
-    public function add($group, $timeline = 0)
+    public function add($group, $timeline = null)
     {
         $params = array(
             'group'    => $group,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_GROUPS_ADD, $params);
@@ -61,12 +61,12 @@ class Groups extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.addContact.rtm
      */
-    public function addContact($groupId, $contactId, $timeline = 0)
+    public function addContact($groupId, $contactId, $timeline = null)
     {
         $params = array(
             'group_id'   => $groupId,
             'contact_id' => $contactId,
-            'timeline'   => $timeline
+            'timeline'   => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_GROUPS_ADD_CONTACT, $params);
@@ -79,11 +79,11 @@ class Groups extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.delete.rtm
      */
-    public function delete($groupId, $timeline = 0)
+    public function delete($groupId, $timeline = null)
     {
         $params = array(
             'group_id' => $groupId,
-            'timeline' => $timeline
+            'timeline' => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_GROUPS_DELETE, $params);
@@ -107,12 +107,12 @@ class Groups extends AbstractService
      * @return DataContainer
      * @link https://www.rememberthemilk.com/services/api/methods/rtm.groups.removeContact.rtm
      */
-    public function removeContact($groupId, $contactId, $timeline = 0)
+    public function removeContact($groupId, $contactId, $timeline = null)
     {
         $params = array(
             'group_id'   => $groupId,
             'contact_id' => $contactId,
-            'timeline'   => $timeline
+            'timeline'   => $timeline === null ? $this->getTimeline() : $timeline
         );
 
         return $this->rtm->call(Rtm::METHOD_GROUPS_REMOVE_CONTACT, $params);
