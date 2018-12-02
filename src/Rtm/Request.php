@@ -111,6 +111,7 @@ class Request
      */
     public function sign($secret)
     {
+        $this->parameters['v'] = 2;
         $params = $this->parameters;
 
         ksort($params);
